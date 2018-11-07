@@ -75,12 +75,13 @@
         "tslint": "tslint --fix --project tsconfig.json",
         "start": "node devServer.js",
         "clean": "rimraf ./dist",
+        "build": "npm run build:staging",
         "build:staging": "npm run clean && npm run build:staging-webpack && npm run build:copy-static && npm run build:copy-bin",
-        "build:staging-webpack": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config webpack.config.staging.js",
+        "build:staging-webpack": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.staging.js",
         "build:copy-static": "ncp ./static ./dist/static",
         "build:copy-bin": "ncp ./bin ./dist",
         "analyzer": "npm run clean && npm run analyzer:build",
-        "analyzer:build": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config webpack.config.analyzer.js"
+        "analyzer:build": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.analyzer.js"
     },
     "license": "MIT",
     "author": {

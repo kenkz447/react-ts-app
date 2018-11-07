@@ -1,5 +1,26 @@
 # react-ts-app
 
-First: `npm install` and then `npm start`.
+#### Install dependencies:
 
-Run `npm run build:staging` to build production. Using `npm run analyzer` to analyzing dependencies.
+```shell
+npm install
+```
+
+#### Run development server:
+
+```shell
+npm start
+```
+
+#### Build production:
+
+```shell
+npm run build
+```
+Output dir: `./dist`, has includes server script and `Dockerfile`.
+
+#### Analyzing dependencies:
+
+```shell
+npm run analyzer
+```

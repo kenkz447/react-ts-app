@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
-import { Route, RouteComponentProps } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import { PageProps, RouteInfo } from './Types';
 
@@ -8,8 +8,6 @@ type PageContructor = {
     readonly withContext?: Array<string>;
     readonly routeInfo: RouteInfo;
 };
-
-export type AppRouteComponentProps<T> = RouteComponentProps<T>;
 
 type AppRouteComponent = React.ComponentType<WithContextProps<{}, PageProps>> & PageContructor;
 
