@@ -12,8 +12,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = function getBuildConfig(options) {
     const plugins = [];
 
-    const definitions = Object.keys(options.definitions || {}).reduce(
-        ({ definitions, key }) => Object.assign(definitions, { key: JSON.stringify(options.definitions[key]) }),
+    const definitions = Object.keys(options.definitions).reduce(
+        (definitionObj, key) => Object.assign(definitionObj, { key: JSON.stringify(options.definitions[key]) }),
         {
             'process.env.NODE_ENV': JSON.stringify('production')
         }
