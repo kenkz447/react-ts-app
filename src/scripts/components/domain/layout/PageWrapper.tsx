@@ -1,6 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+interface PageWrapperContentProps {
+    readonly backgroundColor?: string;
+}
+
 const PageWrapperContent = styled.div`
     min-height: inherit;
     position: absolute;
@@ -9,10 +13,13 @@ const PageWrapperContent = styled.div`
     width: 100%;
     height: 100%;
     background: #fff;
-    padding: 0 30px;
+    padding: 0;
+    background-color: ${(props: PageWrapperContentProps) => props.backgroundColor};
 `;
 
-type PageWrapperProps = React.DOMAttributes<{}>;
+interface PageWrapperProps extends PageWrapperContentProps {
+    readonly className?: string;
+}
 
 export class PageWrapper extends React.Component<PageWrapperProps> {
     componentDidMount() {
@@ -22,8 +29,12 @@ export class PageWrapper extends React.Component<PageWrapperProps> {
     }
 
     render() {
+        const { backgroundColor, className } = this.props;
         return (
-            <PageWrapperContent className="page">
+            <PageWrapperContent
+                className={className}
+                backgroundColor={backgroundColor}
+            >
                 {this.props.children}
             </PageWrapperContent>
         );

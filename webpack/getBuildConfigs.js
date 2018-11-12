@@ -124,7 +124,10 @@ module.exports = function getBuildConfig(options) {
                         loader: 'less-loader',
                         options: {
                             paths: [path.resolve(__dirname, "node_modules")],
-                            javascriptEnabled: true
+                            javascriptEnabled: true,
+                            modifyVars: {
+                                '@blue-6': '#9980FA'
+                            }
                         }
                     }]
                 })

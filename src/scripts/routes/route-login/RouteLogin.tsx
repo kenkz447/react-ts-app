@@ -10,7 +10,6 @@ import { LoginPageContainer } from './containers';
 type RouteLoginProps = AppPageProps;
 
 export class RouteLogin extends PageBase<RouteLoginProps> {
-
     static readonly routeInfo: RouteInfo = {
         path: loginPath,
         title: 'Đăng nhập',
@@ -19,7 +18,10 @@ export class RouteLogin extends PageBase<RouteLoginProps> {
 
     render() {
         return (
-            <PageWrapper>
+            <PageWrapper
+                className="child-centered"
+                backgroundColor="#f0f2f5"
+            >
                 <LoginPageContainer />
             </PageWrapper>
         );

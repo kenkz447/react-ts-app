@@ -8,3 +8,17 @@ body {
 #root {
     min-height: 100vh;
 }
+
+.child-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.w-100 {
+    width: 100% !important;
+}

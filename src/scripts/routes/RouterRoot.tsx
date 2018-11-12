@@ -7,6 +7,7 @@ import { Route, Router, Switch } from 'react-router';
 import { routeFrom } from '@/app';
 import { DomainContext } from '@/domain';
 import { DefaultLayout } from '@/layout';
+import { BlankLayout } from '@/layout/BlankLayout';
 
 import { RouteHome } from './route-home';
 import { RouteLogin } from './route-login';
@@ -34,7 +35,11 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
         return (
             <Router history={history}>
                 <Switch>
-                    {noLayoutRoutes}
+                    <Route>
+                        <BlankLayout>
+                            {noLayoutRoutes}
+                        </BlankLayout>
+                    </Route>
                     <Route path="/">
                         {this.mainRouteComponent}
                     </Route>
