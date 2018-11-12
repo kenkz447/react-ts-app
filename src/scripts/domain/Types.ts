@@ -13,6 +13,8 @@ export interface DomainContext extends AppCoreContext<User> {
     readonly showPageLoading?: boolean;
 }
 
+export type WithAuthClient = Pick<DomainContext, 'authClient'>;
+
 export type WithDomainContext = WithContextProps<DomainContext>;
 
 export interface DecodedJWT {

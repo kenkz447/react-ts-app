@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AntdDivider, FormSubmit } from '@/components';
 import { FormInput } from '@/components/formik/FormField';
 import { FromBody } from '@/components/formik/FromBody';
-import { forgotPath } from '@/configs';
+import { forgotPasswordPath } from '@/configs';
 import { TokenRequestBody } from '@/restful';
 
 export interface LoginFormValues extends TokenRequestBody {
@@ -51,7 +51,7 @@ export function LoginForm(props: LoginFormOwnProps) {
                 Login
             </FormSubmit>
             <AntdDivider dashed={true} />
-            <Link to={forgotPath}>Forgot password?</Link>
+            <Link to={forgotPasswordPath} replace={true}>Forgot password?</Link>
         </FromBody>
     );
 }

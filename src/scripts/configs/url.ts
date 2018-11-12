@@ -1,2 +1,2 @@
 export const loginPath = '/auth/login';
-export const forgotPath = '/auth/forgot-password';
+export const forgotPasswordPath = '/auth/forgot-password';
