@@ -17,7 +17,7 @@ export function FromBody(props: FromBodyProps) {
     return (
         <form onSubmit={handleSubmit}>
             <FormikError formProps={props.formProps} />
-            <div style={{ padding: '15px 0' }}>
+            <div>
                 {props.children}
             </div>
         </form>

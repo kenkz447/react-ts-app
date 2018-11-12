@@ -9,12 +9,12 @@ import { DomainContext } from '@/domain';
 import { DefaultLayout } from '@/layout';
 import { BlankLayout } from '@/layout/BlankLayout';
 
+import { RouteAuthLogin } from './route-auth';
 import { RouteHome } from './route-home';
-import { RouteLogin } from './route-login';
 import { RouteProfile } from './route-profile';
 
-const noLayoutRoutes = routeFrom([
-    RouteLogin
+const authRoutes = routeFrom([
+    RouteAuthLogin
 ]);
 
 const mainRoutes = routeFrom([
@@ -35,9 +35,9 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
         return (
             <Router history={history}>
                 <Switch>
-                    <Route>
+                    <Route path="/auth">
                         <BlankLayout>
-                            {noLayoutRoutes}
+                            {authRoutes}
                         </BlankLayout>
                     </Route>
                     <Route path="/">

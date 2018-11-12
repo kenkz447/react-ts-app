@@ -16,12 +16,12 @@ interface AuthClientProps {
     readonly loginPath: string;
     readonly history: History;
     readonly getResponseToken: (response: any) => string;
-    readonly getTokenCookiesOption?: (token: string, response: any) => CookiesOption;
+    readonly getCookiesOption?: (token: string, response: any) => CookiesOption;
     readonly getUserResource: Resource<{}>;
     readonly getUserEquestParams?: (token: string) => RequestParameter | RequestParameter[];
 }
 
-export class AuthClientBase<User> {
+export class AuthClient<User> {
     static readonly authInstance = Symbol();
 
     readonly props: AuthClientProps;
@@ -58,7 +58,7 @@ export class AuthClientBase<User> {
     }
 
     async login(resource: Resource<{}>, requestBody: {}) {
-        const { getResponseToken, getTokenCookiesOption } = this.props;
+        const { getResponseToken, getCookiesOption } = this.props;
         try {
             const response = await request(
                 resource,
@@ -69,7 +69,7 @@ export class AuthClientBase<User> {
             );
 
             const token = getResponseToken(response);
-            const tokenCookiesOption = getTokenCookiesOption && getTokenCookiesOption(token, response);
+            const tokenCookiesOption = getCookiesOption && getCookiesOption(token, response);
             saveToken(token, tokenCookiesOption);
 
             const returnUrlParam = getUrlSearchParam('returnUrl');

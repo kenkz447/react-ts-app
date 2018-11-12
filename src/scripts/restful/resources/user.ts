@@ -23,14 +23,8 @@ export interface DeletedUserMeta {
 export const userResourceType = new ResourceType<User>(nameof<User>());
 
 export const userResources = {
-    getById: new Resource<User>({
+    findOne: new Resource<User>({
         resourceType: userResourceType,
-        url: '/Users/:id',
-        getResponseData: async (requestInfo) => {
-            const { response } = requestInfo;
-
-            const responseData = await response.json();
-            return responseData.data;
-        }
+        url: '/users/:id'
     })
 };

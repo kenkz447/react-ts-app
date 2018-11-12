@@ -38,4 +38,8 @@ function FormInputComponent(props: FormFieldProps) {
     return input;
 }
 
+FormInputComponent.defaultProps = {
+    useFieldWrapper: true
+} as FormFieldProps;
+
 export const FormInput = React.memo(FormInputComponent);

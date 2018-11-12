@@ -1,14 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { LoginFormControl } from '@/forms/accounts';
+import { AntdCard } from '@/components';
+import { LoginFormControl } from '@/forms';
 
 const LoginPageWrapper = styled.div`
     width: 100%;
     max-width: 360px;
-    padding: 15px;
     margin: 0 auto;
-    text-align: center;
 `;
 
 const LoginHeader = styled.h1`
@@ -25,9 +24,13 @@ export class LoginPageContainer extends React.PureComponent {
     render() {
         return (
             <LoginPageWrapper>
-                <LoginHeader>Login</LoginHeader>
-                <LoginDescription>React typescript app with Ant Design</LoginDescription>
-                <LoginFormControl />
+                <AntdCard>
+                    <React.Fragment>
+                        <LoginHeader>Login</LoginHeader>
+                        <LoginDescription>React typescript app with Ant Design</LoginDescription>
+                        <LoginFormControl />
+                    </React.Fragment>
+                </AntdCard>
             </LoginPageWrapper>
         );
     }

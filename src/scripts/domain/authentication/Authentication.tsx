@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 
-import { DomainContext } from './Types';
+import { User } from '@/restful';
+
+import { DomainContext } from '../Types';
+import { AuthClient } from './AuthClient';
 
 type AuthenticationOwnProps = {
-
+    readonly authClient: AuthClient<User>;
 };
 
 type AuthenticationProps = WithContextProps<DomainContext> &
@@ -13,6 +16,15 @@ type AuthenticationProps = WithContextProps<DomainContext> &
     AuthenticationOwnProps;
 
 class Authentication extends React.PureComponent<AuthenticationProps> {
+    constructor(props: AuthenticationProps) {
+        super(props);
+
+        const { setContext, authClient } = props;
+        setContext({
+            authClient: authClient
+        });
+    }
+
     async componentDidMount() {
         const { setContext, authClient } = this.props;
 
@@ -32,4 +44,4 @@ class Authentication extends React.PureComponent<AuthenticationProps> {
     }
 }
 
-export default withContext<DomainContext>('authClient')(Authentication);
+export default withContext<DomainContext, AuthenticationOwnProps>()(Authentication);

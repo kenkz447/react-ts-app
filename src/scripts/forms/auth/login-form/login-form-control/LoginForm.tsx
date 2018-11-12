@@ -1,9 +1,11 @@
 import { FormikProps } from 'formik';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-import { FormSubmit } from '@/components';
+import { AntdDivider, FormSubmit } from '@/components';
 import { FormInput } from '@/components/formik/FormField';
 import { FromBody } from '@/components/formik/FromBody';
+import { forgotPath } from '@/configs';
 import { TokenRequestBody } from '@/restful';
 
 export interface LoginFormValues extends TokenRequestBody {
@@ -17,7 +19,6 @@ export interface LoginFormOwnProps extends FormikProps<LoginFormValues> {
 export function LoginForm(props: LoginFormOwnProps) {
     const {
         values,
-        errors,
         handleChange,
         handleBlur
     } = props;
@@ -25,14 +26,13 @@ export function LoginForm(props: LoginFormOwnProps) {
     return (
         <FromBody formProps={props}>
             <FormInput
-                name={nameof<LoginFormValues>(o => o.username)}
+                name={nameof<LoginFormValues>(o => o.identifier)}
                 prefix="adi-user"
-                value={values.username}
+                value={values.identifier}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
                 placeholder="username"
-                useFieldWrapper={true}
             />
             <FormInput
                 type="password"
@@ -43,7 +43,6 @@ export function LoginForm(props: LoginFormOwnProps) {
                 value={values.password}
                 size="large"
                 placeholder="password"
-                useFieldWrapper={true}
             />
             <FormSubmit
                 formProps={props}
@@ -51,6 +50,8 @@ export function LoginForm(props: LoginFormOwnProps) {
             >
                 Login
             </FormSubmit>
+            <AntdDivider dashed={true} />
+            <Link to={forgotPath}>Forgot password?</Link>
         </FromBody>
     );
 }

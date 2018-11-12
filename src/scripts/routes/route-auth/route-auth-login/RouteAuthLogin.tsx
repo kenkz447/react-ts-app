@@ -7,9 +7,9 @@ import { AppPageProps } from '@/domain';
 
 import { LoginPageContainer } from './containers';
 
-type RouteLoginProps = AppPageProps;
+type RouteAuthLoginProps = AppPageProps;
 
-export class RouteLogin extends PageBase<RouteLoginProps> {
+export class RouteAuthLogin extends PageBase<RouteAuthLoginProps> {
     static readonly routeInfo: RouteInfo = {
         path: loginPath,
         title: 'Đăng nhập',

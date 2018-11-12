@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 
 import { DomainContext } from '@/domain';
-import { tokenResources } from '@/restful';
+import { authResources } from '@/restful';
 
 import {
     LoginForm,
@@ -37,7 +37,7 @@ class LoginFormControl extends React.PureComponent<LoginFormControlProps> {
         const { authClient } = this.props;
 
         try {
-            await authClient.login(tokenResources.create, values);
+            await authClient.login(authResources.local, values);
         } catch (error) {
             formiKBag.setStatus({
                 error: 'Tài khoản hoặc mật khẩu không chính xác!'

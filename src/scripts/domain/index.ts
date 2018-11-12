@@ -1,4 +1,5 @@
+export * from './LoadingBar';
 export * from './Types';
-export { default as Authentication } from './Authentication';
-export { default as ContextFetcher } from './ContextFetcher';
+export * from './authentication';
 export { default as AccessControl } from './AccessControl';
+export { default as ContextFetcher } from './ContextFetcher';

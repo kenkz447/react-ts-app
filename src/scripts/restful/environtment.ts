@@ -3,7 +3,10 @@ import { setupEnvironment, Store } from 'react-restful';
 import { AntdNotification } from '@/components';
 import { getToken } from '@/utilities';
 
+import { customFetch } from './utils';
+
 const environment = setupEnvironment({
+    fetchMethod: customFetch,
     entry: API_ENTRY,
     store: new Store(),
     requestBodyParser: (key, value) => {
