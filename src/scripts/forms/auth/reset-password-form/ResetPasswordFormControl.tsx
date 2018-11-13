@@ -1,9 +1,28 @@
-import { authResources, formFactory } from '@/restful';
+import { withContext } from 'react-context-service';
 
-import { ResetPasswordForm } from './reset-password-form-control';
+import { AntdModal } from '@/components';
+import { loginPath } from '@/configs';
+import { WithHistory } from '@/domain';
+import { authResources, formFactory, FormProps } from '@/restful';
 
-export const ResetPasswordFormControl = formFactory.create({
+import {
+    ResetPasswordForm,
+    ResetPasswordFormValues
+} from './reset-password-form-control';
+
+export const ResetPasswordFormControl = formFactory.create<FormProps<ResetPasswordFormValues>>({
+    wrapper: withContext<WithHistory>('history'),
     component: ResetPasswordForm,
     resource: authResources.resetPassword,
-    onSusscess: (response) => null
+    onSusscess: (value, props: WithHistory) => {
+        AntdModal.success({
+            title: 'Reset completed',
+            content: 'Please login with your new password!',
+            maskClosable: false,
+            okText: 'To login page',
+            onOk: () => {
+                props.history.replace(loginPath);
+            }
+        });
+    }
 });

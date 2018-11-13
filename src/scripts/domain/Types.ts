@@ -14,6 +14,7 @@ export interface DomainContext extends AppCoreContext<User> {
 }
 
 export type WithAuthClient = Pick<DomainContext, 'authClient'>;
+export type WithHistory = Pick<DomainContext, 'history'>;
 
 export type WithDomainContext = WithContextProps<DomainContext>;
 

@@ -1,7 +1,12 @@
 import { withContext } from 'react-context-service';
 
 import { WithAuthClient } from '@/domain';
-import { authResources, formFactory, LocalLoginResponseBody } from '@/restful';
+import {
+    authResources,
+    formFactory,
+    FormProps,
+    LocalLoginResponseBody
+} from '@/restful';
 
 import { LoginForm } from './login-form-control';
 

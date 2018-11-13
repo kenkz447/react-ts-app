@@ -22,6 +22,7 @@ export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
         <FromBody formProps={props}>
             <FormInput
                 name={nameof<ResetPasswordFormValues>(o => o.password)}
+                type="password"
                 prefix="adi-lock"
                 value={values.password}
                 onChange={handleChange}
@@ -31,8 +32,9 @@ export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
             />
             <FormInput
                 name={nameof<ResetPasswordFormValues>(o => o.passwordConfirmation)}
+                type="password"
                 prefix="adi-lock"
-                value={values.password}
+                value={values.passwordConfirmation}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
@@ -44,8 +46,6 @@ export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
             >
                 Reset password
             </FormSubmit>
-            <AntdDivider dashed={true} />
-            <Link to={loginPath} replace={true}>Login</Link>
         </FromBody>
     );
 }

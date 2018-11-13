@@ -11,7 +11,6 @@ type AuthenticationOwnProps = {
 };
 
 type AuthenticationProps = WithContextProps<DomainContext> &
-    Pick<DomainContext, 'authClient'> &
     Pick<DomainContext, 'history'> &
     AuthenticationOwnProps;
 
@@ -26,7 +25,7 @@ class Authentication extends React.PureComponent<AuthenticationProps> {
     }
 
     async componentDidMount() {
-        const { setContext, authClient } = this.props;
+        const { setContext, authClient, history } = this.props;
 
         try {
             const user = await authClient.getLoggedInUser();
@@ -34,6 +33,11 @@ class Authentication extends React.PureComponent<AuthenticationProps> {
                 currentUser: user
             });
         } catch (error) {
+            const isOnAuthPage = history.location.pathname.startsWith('/auth');
+            if (isOnAuthPage) {
+                return;
+            }
+
             authClient.gotoLoginPage();
             throw error;
         }
@@ -44,4 +48,4 @@ class Authentication extends React.PureComponent<AuthenticationProps> {
     }
 }
 
-export default withContext<DomainContext, AuthenticationOwnProps>()(Authentication);
+export default withContext<DomainContext, AuthenticationOwnProps>('history')(Authentication);

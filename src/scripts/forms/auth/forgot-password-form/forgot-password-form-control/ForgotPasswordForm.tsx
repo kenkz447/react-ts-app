@@ -36,7 +36,7 @@ export function ForgotPasswordForm(props: ForgotPasswordFormOwnProps) {
                 Recovery password
             </FormSubmit>
             <AntdDivider dashed={true} />
-            <Link to={loginPath} replace={true}>Login</Link>
+            <Link to={loginPath} replace={true}>Go to login page</Link>
         </FromBody>
     );
 }

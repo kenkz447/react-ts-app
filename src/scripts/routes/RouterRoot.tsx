@@ -9,14 +9,9 @@ import { DomainContext } from '@/domain';
 import { DefaultLayout } from '@/layout';
 import { BlankLayout } from '@/layout/BlankLayout';
 
-import { RouteAuthForgotPassword, RouteAuthLogin } from './route-auth';
+import authRoutes from './route-auth';
 import { RouteHome } from './route-home';
 import { RouteProfile } from './route-profile';
-
-const authRoutes = routeFrom([
-    RouteAuthLogin,
-    RouteAuthForgotPassword
-]);
 
 const mainRoutes = routeFrom([
     RouteHome,

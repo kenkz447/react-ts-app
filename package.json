@@ -30,6 +30,7 @@
         "@types/react-dom": "^16.0.9",
         "@types/react-router-dom": "^4.3.0",
         "@types/react-transition-group": "^2.0.13",
+        "@types/styled-components": "^4.0.3",
         "@types/webpack-env": "^1.13.6",
         "compression-webpack-plugin": "^2.0.0",
         "cross-env": "^5.1.5",
