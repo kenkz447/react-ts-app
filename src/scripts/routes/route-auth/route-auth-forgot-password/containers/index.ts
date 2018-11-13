@@ -1,1 +1,1 @@
-export * from './LoginPageContainer';
+export * from './ForgotPasswordContainer';

@@ -1,11 +1,8 @@
 import { authResources, formFactory } from '@/restful';
 
-import {
-    ResetPasswordForm,
-    ResetPasswordFormValues
-} from './reset-password-form-control';
+import { ResetPasswordForm } from './reset-password-form-control';
 
-export const ResetPasswordFormControl = formFactory.create<ResetPasswordFormValues>({
+export const ResetPasswordFormControl = formFactory.create({
     component: ResetPasswordForm,
     resource: authResources.resetPassword,
     onSusscess: (response) => null

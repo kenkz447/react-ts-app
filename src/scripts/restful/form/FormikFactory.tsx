@@ -21,13 +21,13 @@ export interface FormCreateOptions<FormValues = {}, OwnProps = {}, RecordType = 
     readonly initialValues?: FormValues;
     readonly component: React.ComponentType<FormikProps<FormValues>>;
     // tslint:disable-next-line:no-any
-    readonly wrapper?: (FromComponent: React.ComponentType<any>) => React.ComponentType;
+    readonly wrapper?: (FromComponent: React.ComponentType<any>) => React.ComponentType<any>;
     readonly getRequestParams?: (formValues: FormValues, fromProps: OwnProps) => RequestParams;
     readonly getRequestMeta?: (formValues: FormValues, fromProps: OwnProps) => {};
 }
 
-export interface FormProps<FormValues = {}, RecordType = {}> {
-    readonly initialValues?: FormValues;
+export interface FormProps<FormValues = {}> {
+    readonly initialValues?: Partial<FormValues>;
 }
 
 export class FormikFactory {
@@ -72,7 +72,10 @@ export class FormikFactory {
         };
     }
 
-    readonly create = function <P = {}, V = {}>(options: FormCreateOptions) {
+    readonly create = function <
+        P extends FormProps<V> = FormProps<V>,
+        V = {}
+        >(options: FormCreateOptions): React.ComponentType<P> {
         const { component, wrapper } = options;
 
         const Form = (props: FormProps) => {

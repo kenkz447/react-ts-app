@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { AntdCard } from '@/components';
+import { forgotPasswordPath } from '@/configs';
 import { ForgotPasswordFormControl } from '@/forms';
 
 const ForgotPasswordWrapper = styled.div`
@@ -26,9 +27,17 @@ export class ForgotPasswordPageContainer extends React.PureComponent {
             <ForgotPasswordWrapper>
                 <AntdCard>
                     <React.Fragment>
-                        <ForgotPasswordHeader>Forgot Password</ForgotPasswordHeader>
-                        <ForgotPasswordDescription>React typescript app with Ant Design</ForgotPasswordDescription>
-                        <ForgotPasswordFormControl />
+                        <ForgotPasswordHeader>
+                            Forgot Password
+                        </ForgotPasswordHeader>
+                        <ForgotPasswordDescription>
+                            React typescript app with Ant Design
+                        </ForgotPasswordDescription>
+                        <ForgotPasswordFormControl
+                            initialValues={{
+                                url: forgotPasswordPath
+                            }}
+                        />
                     </React.Fragment>
                 </AntdCard>
             </ForgotPasswordWrapper>
