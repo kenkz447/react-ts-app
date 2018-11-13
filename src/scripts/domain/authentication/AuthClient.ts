@@ -2,7 +2,7 @@
 import { History } from 'history';
 import { RequestParameter, Resource } from 'react-restful';
 
-import { request } from '@/restful';
+import { LocalLoginResponseBody, request } from '@/restful';
 import {
     clearToken,
     CookiesOption,
@@ -57,19 +57,12 @@ export class AuthClient<User> {
         }
     }
 
-    async login(resource: Resource<{}>, requestBody: {}) {
+    readonly signIn = (loginResponse: LocalLoginResponseBody) => {
         const { getResponseToken, getCookiesOption } = this.props;
         try {
-            const response = await request(
-                resource,
-                {
-                    type: 'body',
-                    value: requestBody
-                }
-            );
 
-            const token = getResponseToken(response);
-            const tokenCookiesOption = getCookiesOption && getCookiesOption(token, response);
+            const token = getResponseToken(loginResponse);
+            const tokenCookiesOption = getCookiesOption && getCookiesOption(token, loginResponse);
             saveToken(token, tokenCookiesOption);
 
             const returnUrlParam = getUrlSearchParam('returnUrl');

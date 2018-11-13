@@ -1,51 +1,16 @@
-import { Formik, FormikBag } from 'formik';
-import * as React from 'react';
-import { withContext, WithContextProps } from 'react-context-service';
+import { withContext } from 'react-context-service';
 
-import { DomainContext } from '@/domain';
-import { authResources } from '@/restful';
+import { WithAuthClient } from '@/domain';
+import { authResources, formFactory, LocalLoginResponseBody } from '@/restful';
 
-import {
-    LoginForm,
-    LoginFormOwnProps,
-    LoginFormValues
-} from './login-form-control';
+import { LoginForm } from './login-form-control';
 
-interface LoginFormControlOwnProps {
-
-}
-
-type LoginFormControlContextProps = Pick<DomainContext, 'authClient'>;
-type LoginFormControlProps = WithContextProps<LoginFormControlContextProps, LoginFormControlOwnProps>;
-
-class LoginFormControl extends React.PureComponent<LoginFormControlProps> {
-    public render() {
-        return (
-            <Formik
-                initialValues={{}}
-                onSubmit={this.onSubmit}
-            >
-                {LoginForm}
-            </Formik>
-        );
+export const LoginFormControl = formFactory.create({
+    wrapper: withContext<WithAuthClient>('authClient'),
+    component: LoginForm,
+    resource: authResources.local,
+    onSusscess: (response: LocalLoginResponseBody, ownProps: WithAuthClient) => {
+        const { authClient } = ownProps;
+        authClient.signIn(response);
     }
-
-    readonly onSubmit = async (
-        values: LoginFormValues,
-        formiKBag: FormikBag<LoginFormOwnProps, LoginFormValues>
-    ) => {
-        const { authClient } = this.props;
-
-        try {
-            await authClient.login(authResources.local, values);
-        } catch (error) {
-            formiKBag.setStatus({
-                error: 'Tài khoản hoặc mật khẩu không chính xác!'
-            });
-        } finally {
-            formiKBag.setSubmitting(false);
-        }
-    }
-}
-
-export default withContext<DomainContext, LoginFormControlOwnProps>('authClient')(LoginFormControl);
+});

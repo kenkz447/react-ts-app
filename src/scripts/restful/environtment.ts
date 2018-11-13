@@ -3,6 +3,7 @@ import { setupEnvironment, Store } from 'react-restful';
 import { AntdNotification } from '@/components';
 import { getToken } from '@/utilities';
 
+import { FormikFactory } from './form';
 import { customFetch } from './utils';
 
 const environment = setupEnvironment({
@@ -55,3 +56,7 @@ const environment = setupEnvironment({
 });
 
 export const request = environment.request;
+
+export const formFactory = new FormikFactory({
+    request: request
+});

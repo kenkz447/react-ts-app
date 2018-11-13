@@ -11,7 +11,7 @@ import {
     DecodedJWT,
     LoadingBar
 } from './domain';
-import { TokenResponseBody, User, userResources } from './restful';
+import { LocalLoginResponseBody, User, userResources } from './restful';
 import { RouterRoot } from './routes';
 
 const browserHistory = createBrowserHistory();
@@ -28,7 +28,7 @@ const authClient = new AuthClient<User>({
             value: userInfo._id
         };
     },
-    getResponseToken: (response: TokenResponseBody) => response.jwt,
+    getResponseToken: (response: LocalLoginResponseBody) => response.jwt,
     getCookiesOption: (token) => {
         const userInfo: DecodedJWT = jwtDecode(token);
         const now = new Date();

@@ -20,4 +20,4 @@ function FormSubmitButtonComponent(props: FormSubmitButtonProps & AntdButtonProp
     );
 }
 
-export const FormSubmit = React.memo(FormSubmitButtonComponent);
+export const FormSubmit = React.memo<FormSubmitButtonProps & AntdButtonProps>(FormSubmitButtonComponent);

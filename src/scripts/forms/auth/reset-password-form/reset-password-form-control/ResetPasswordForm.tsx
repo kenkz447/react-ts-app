@@ -3,18 +3,15 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
-import { forgotPasswordPath } from '@/configs';
-import { LocalLoginRequestBody } from '@/restful';
+import { loginPath } from '@/configs';
+import { ResetPasswordRequestBody } from '@/restful';
 
-export interface LoginFormValues extends LocalLoginRequestBody {
-
-}
-
-export interface LoginFormOwnProps extends FormikProps<LoginFormValues> {
+export type ResetPasswordFormValues = ResetPasswordRequestBody;
+export interface ResetPasswordFormOwnProps extends FormikProps<ResetPasswordFormValues> {
 
 }
 
-export function LoginForm(props: LoginFormOwnProps) {
+export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
     const {
         values,
         handleChange,
@@ -24,32 +21,31 @@ export function LoginForm(props: LoginFormOwnProps) {
     return (
         <FromBody formProps={props}>
             <FormInput
-                name={nameof<LoginFormValues>(o => o.identifier)}
-                prefix="adi-user"
-                value={values.identifier}
+                name={nameof<ResetPasswordFormValues>(o => o.password)}
+                prefix="adi-lock"
+                value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
-                placeholder="username"
+                placeholder="New password"
             />
             <FormInput
-                type="password"
-                name={nameof<LoginFormValues>(o => o.password)}
+                name={nameof<ResetPasswordFormValues>(o => o.passwordConfirmation)}
                 prefix="adi-lock"
+                value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
                 size="large"
-                placeholder="password"
+                placeholder="New password confirmation"
             />
             <FormSubmit
                 formProps={props}
                 className="w-100"
             >
-                Login
+                Reset password
             </FormSubmit>
             <AntdDivider dashed={true} />
-            <Link to={forgotPasswordPath} replace={true}>Forgot password?</Link>
+            <Link to={loginPath} replace={true}>Login</Link>
         </FromBody>
     );
 }

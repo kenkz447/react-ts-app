@@ -1,1 +1,1 @@
-export { default as LoginFormControl } from './LoginFormControl';
+export * from './LoginFormControl';

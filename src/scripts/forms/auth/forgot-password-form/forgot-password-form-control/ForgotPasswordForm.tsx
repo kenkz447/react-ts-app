@@ -2,16 +2,11 @@ import { FormikProps } from 'formik';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AntdDivider, FormSubmit } from '@/components';
-import { FormInput } from '@/components/formik/FormField';
-import { FromBody } from '@/components/formik/FromBody';
+import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
 import { loginPath } from '@/configs';
+import { ForgotPasswordRequestBody } from '@/restful';
 
-export interface ForgotPasswordFormValues {
-    readonly email: string;
-    readonly url: string;
-}
-
+export type ForgotPasswordFormValues = ForgotPasswordRequestBody;
 export interface ForgotPasswordFormOwnProps extends FormikProps<ForgotPasswordFormValues> {
 
 }
