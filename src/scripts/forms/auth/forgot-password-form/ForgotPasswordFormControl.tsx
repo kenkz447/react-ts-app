@@ -3,6 +3,7 @@ import { withContext } from 'react-context-service';
 import { AntdModal } from '@/components';
 import { loginPath } from '@/configs';
 import { WithHistory } from '@/domain';
+import { text } from '@/i18n';
 import { authResources, formFactory } from '@/restful';
 
 import { ForgotPasswordForm } from './forgot-password-form-control';
@@ -13,10 +14,10 @@ export const ForgotPasswordFormControl = formFactory.create({
     resource: authResources.forgotPassword,
     onSusscess: (value, props: WithHistory) => {
         AntdModal.success({
-            title: 'Reset password mail was sended!',
-            content: 'Please check your inbox(includes SPAM folder)!',
+            title: text('Reset password mail was sended!'),
+            content: text('Please check your inbox(includes SPAM folder)!'),
             maskClosable: false,
-            okText: 'To login page',
+            okText: text('To login page'),
             onOk: () => {
                 props.history.replace(loginPath);
             }

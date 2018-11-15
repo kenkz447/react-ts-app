@@ -3,6 +3,7 @@ import { withContext } from 'react-context-service';
 import { AntdModal } from '@/components';
 import { loginPath } from '@/configs';
 import { WithHistory } from '@/domain';
+import { text } from '@/i18n';
 import { authResources, formFactory, FormProps } from '@/restful';
 
 import {
@@ -16,10 +17,10 @@ export const ResetPasswordFormControl = formFactory.create<FormProps<ResetPasswo
     resource: authResources.resetPassword,
     onSusscess: (value, props: WithHistory) => {
         AntdModal.success({
-            title: 'Reset completed',
-            content: 'Please login with your new password!',
+            title: text('Reset completed'),
+            content: text('Please login with your new password!'),
             maskClosable: false,
-            okText: 'To login page',
+            okText: text('To login page'),
             onOk: () => {
                 props.history.replace(loginPath);
             }

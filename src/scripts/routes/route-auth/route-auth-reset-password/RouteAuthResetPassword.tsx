@@ -4,13 +4,14 @@ import { RouteInfo } from '@/app';
 import { PageBase, PageWrapper } from '@/components';
 import { resetPasswordPath } from '@/configs';
 import { AppPageProps } from '@/domain';
+import { text } from '@/i18n';
 
 import { ResetPasswordPageContainer } from './containers';
 
 export class RouteAuthResetPassword extends PageBase<AppPageProps> {
     static readonly routeInfo: RouteInfo = {
         path: resetPasswordPath,
-        title: 'Đăng nhập',
+        title: text('Đăng nhập'),
         exact: true
     };
 

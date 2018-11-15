@@ -1,15 +1,12 @@
 import { FormikProps } from 'formik';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
-import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
-import { loginPath } from '@/configs';
+import { FormInput, FormSubmit, FromBody } from '@/components';
+import { text } from '@/i18n';
 import { ResetPasswordRequestBody } from '@/restful';
 
 export type ResetPasswordFormValues = ResetPasswordRequestBody;
-export interface ResetPasswordFormOwnProps extends FormikProps<ResetPasswordFormValues> {
-
-}
+export type ResetPasswordFormOwnProps = FormikProps<ResetPasswordFormValues>;
 
 export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
     const {
@@ -28,7 +25,7 @@ export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
-                placeholder="New password"
+                placeholder={text('New password')}
             />
             <FormInput
                 name={nameof<ResetPasswordFormValues>(o => o.passwordConfirmation)}
@@ -38,13 +35,13 @@ export function ResetPasswordForm(props: ResetPasswordFormOwnProps) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
-                placeholder="New password confirmation"
+                placeholder={text('New password confirmation')}
             />
             <FormSubmit
                 formProps={props}
                 className="w-100"
             >
-                Reset password
+                {text('Reset password')}
             </FormSubmit>
         </FromBody>
     );

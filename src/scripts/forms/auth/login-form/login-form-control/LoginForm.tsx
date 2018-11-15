@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
 import { forgotPasswordPath } from '@/configs';
+import { text } from '@/i18n';
 import { LocalLoginRequestBody } from '@/restful';
 
 export interface LoginFormValues extends LocalLoginRequestBody {
@@ -30,7 +31,7 @@ export function LoginForm(props: LoginFormOwnProps) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
-                placeholder="username"
+                placeholder={text('username')}
             />
             <FormInput
                 type="password"
@@ -40,16 +41,21 @@ export function LoginForm(props: LoginFormOwnProps) {
                 onBlur={handleBlur}
                 value={values.password}
                 size="large"
-                placeholder="password"
+                placeholder={text('password')}
             />
             <FormSubmit
                 formProps={props}
                 className="w-100"
             >
-                Login
+                {text('Login')}
             </FormSubmit>
             <AntdDivider dashed={true} />
-            <Link to={forgotPasswordPath} replace={true}>Forgot password?</Link>
+            <Link
+                to={forgotPasswordPath}
+                replace={true}
+            >
+                {text('Forgot password')}?
+            </Link>
         </FromBody>
     );
 }

@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
 import { loginPath } from '@/configs';
+import { text } from '@/i18n';
 import { ForgotPasswordRequestBody } from '@/restful';
 
 export type ForgotPasswordFormValues = ForgotPasswordRequestBody;
-export interface ForgotPasswordFormOwnProps extends FormikProps<ForgotPasswordFormValues> {
-
-}
+export type ForgotPasswordFormOwnProps = FormikProps<ForgotPasswordFormValues>;
 
 export function ForgotPasswordForm(props: ForgotPasswordFormOwnProps) {
     const {
@@ -33,10 +32,12 @@ export function ForgotPasswordForm(props: ForgotPasswordFormOwnProps) {
                 formProps={props}
                 className="w-100"
             >
-                Recovery password
+                {text('Recovery password')}
             </FormSubmit>
             <AntdDivider dashed={true} />
-            <Link to={loginPath} replace={true}>Go to login page</Link>
+            <Link to={loginPath} replace={true}>
+                {text('Go to login page')}
+            </Link>
         </FromBody>
     );
 }
