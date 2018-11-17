@@ -12,7 +12,7 @@ import {
 type Mode = 'hibernate' | 'init' | 'active' | 'complete';
 
 type LoadingBarProps = {
-    readonly style?: Object
+    readonly style?: React.CSSProperties;
 };
 
 type LoadingBarState = {
@@ -145,7 +145,7 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
             top: '0',
             zIndex: 9000,
             backgroundColor: '#f0ad4e',
-            height: '4px',
+            height: '3px',
             transition,
             width: `${width}%`,
             ...this.props.style

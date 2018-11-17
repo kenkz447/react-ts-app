@@ -11,12 +11,12 @@ import {
 } from '@/configs';
 import { WithHistory } from '@/domain';
 
-interface DefaultLayoutSiderMenu extends WithHistory {
-    readonly isSiderOpened: boolean;
+interface DefaultLayoutSiderMenu {
+    readonly onMenuItemClick: (url: string) => void;
 }
 
 export function DefaultLayoutSiderMenu(props: DefaultLayoutSiderMenu) {
-    const { history } = props;
+    const { onMenuItemClick } = props;
     let subMenuOpenKey = location.pathname.split('/')[1];
     if (subMenuOpenKey) {
         subMenuOpenKey = '/' + subMenuOpenKey;
@@ -29,6 +29,7 @@ export function DefaultLayoutSiderMenu(props: DefaultLayoutSiderMenu) {
             theme="dark"
             defaultOpenKeys={[subMenuOpenKey]}
             defaultSelectedKeys={[location.pathname]}
+            onClick={({ key }) => onMenuItemClick(key)}
         >
             <AntdMenu.Item key={DASHBOARD_URL}>
                 <AntdIcon type="dashboard" />

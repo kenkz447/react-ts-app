@@ -19,6 +19,7 @@ const mainRoutes = routeFrom([
 ]);
 
 type RouterRootContextProps =
+    Pick<DomainContext, 'currentBreakpoint'> &
     Pick<DomainContext, 'history'> &
     Pick<DomainContext, 'appState'>;
 
@@ -45,13 +46,13 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
     }
 
     readonly mainRouteComponent = ({ location }) => {
-        const { appState, history } = this.props;
+        const { appState, history, currentBreakpoint } = this.props;
         if (appState !== 'READY') {
             return null;
         }
 
         return (
-            <DefaultLayout history={history}>
+            <DefaultLayout history={history} currentBreakpoint={currentBreakpoint}>
                 <Switch location={location}>
                     {mainRoutes}
                     <Route render={() => 'Page not found!'} />
@@ -61,4 +62,4 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
     }
 }
 
-export default withContext<DomainContext>('history', 'appState')(RouterRoot); 
+export default withContext<DomainContext>('history', 'appState', 'currentBreakpoint')(RouterRoot); 

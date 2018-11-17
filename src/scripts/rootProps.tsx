@@ -2,14 +2,18 @@ import { createBrowserHistory } from 'history';
 import * as jwtDecode from 'jwt-decode';
 import * as React from 'react';
 
-import { AppCoreContext, BreakpointDetector, RootProps } from './app';
+import {
+    AppCoreContext,
+    BreakpointDetector,
+    LoadingBar,
+    RootProps
+} from './app';
 import { loginPath } from './configs';
 import {
     AuthClient,
     Authentication,
     ContextFetcher,
     DecodedJWT,
-    LoadingBar,
     policies
 } from './domain';
 import { LocalLoginResponseBody, User, userResources } from './restful';
@@ -34,11 +38,10 @@ const authClient = new AuthClient<User>({
 
 const AppContent = () => (
     <Authentication authClient={authClient}>
-        <ContextFetcher>
-            <RouterRoot />
-        </ContextFetcher>
+        <LoadingBar style={{ backgroundColor: '#9980FA' }} />
+        <ContextFetcher />
         <BreakpointDetector />
-        <LoadingBar />
+        <RouterRoot />
     </Authentication>
 );
 

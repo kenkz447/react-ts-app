@@ -4,6 +4,7 @@ export * from './AntdBreadcrumb';
 export * from './AntdButton';
 export * from './AntdCard';
 export * from './AntdDivider';
+export * from './AntdDrawer';
 export * from './AntdFormItem';
 export * from './AntdIcon';
 export * from './AntdInput';
