@@ -6,8 +6,7 @@ import { Route, Router, Switch } from 'react-router';
 
 import { routeFrom } from '@/app';
 import { DomainContext } from '@/domain';
-import { DefaultLayout } from '@/layout';
-import { BlankLayout } from '@/layout/BlankLayout';
+import { BlankLayout, DefaultLayout } from '@/layout';
 
 import authRoutes from './route-auth';
 import { RouteHome } from './route-home';

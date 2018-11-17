@@ -6,6 +6,7 @@ import { AntdDrawer, AntdIcon, AntdLayout } from '@/components';
 import { WithHistory } from '@/domain';
 
 export interface DefaultLayoutMobileProps extends WithHistory {
+    readonly header: JSX.Element;
     readonly children: JSX.Element;
     readonly footer: JSX.Element;
     readonly siderProps: SiderProps;
@@ -45,16 +46,19 @@ export class DefaultLayoutMobile extends React.Component<DefaultLayoutMobileProp
     }
 
     render() {
-        const { siderProps, children, footer } = this.props;
+        const { siderProps, children, footer, header } = this.props;
         return (
             <React.Fragment>
                 <AntdLayout style={{ minHeight: '100vh' }}>
                     <AntdLayout.Header style={{ background: '#fff', padding: 0 }}>
-                        <AntdIcon
-                            className="sider-trigger"
-                            type={siderProps.collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={this.onDrawerToggle}
-                        />
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <AntdIcon
+                                className="sider-trigger"
+                                type={siderProps.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={this.onDrawerToggle}
+                            />
+                            {header}
+                        </div>
                     </AntdLayout.Header>
                     <AntdLayout.Content>
                         {children}

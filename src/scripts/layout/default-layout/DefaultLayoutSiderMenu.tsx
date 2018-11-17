@@ -10,6 +10,7 @@ import {
     USER_URL_PREFIX
 } from '@/configs';
 import { WithHistory } from '@/domain';
+import { text } from '@/i18n';
 
 interface DefaultLayoutSiderMenu {
     readonly onMenuItemClick: (url: string) => void;
@@ -33,20 +34,20 @@ export function DefaultLayoutSiderMenu(props: DefaultLayoutSiderMenu) {
         >
             <AntdMenu.Item key={DASHBOARD_URL}>
                 <AntdIcon type="dashboard" />
-                <span>{DASHBOARD_TITLE}</span>
+                <span>{text(DASHBOARD_TITLE)}</span>
             </AntdMenu.Item>
             <AntdMenu.SubMenu
                 key={USER_URL_PREFIX}
                 title={(
                     <span>
                         <AntdIcon type="user" />
-                        <span>User</span>
+                        <span>{text('User')}</span>
                     </span>
                 )}
             >
                 <AntdMenu.Item key={USER_PROFILE_URL}>
                     <AntdIcon type="idcard" />
-                    <span>{PROFILE_TITLE}</span>
+                    <span>{text(PROFILE_TITLE)}</span>
                 </AntdMenu.Item>
             </AntdMenu.SubMenu>
         </AntdMenu>

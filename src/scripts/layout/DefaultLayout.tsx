@@ -9,6 +9,7 @@ import {
     DefaultLayoutMobile,
     DefaultLayoutSiderMenu
 } from './default-layout';
+import { DefaultLayoutHeader } from './default-layout/DefaultLayoutHeader';
 
 const DefaultLayoutWrapper = styled.div`
     height: 100vh;
@@ -100,6 +101,7 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
     render() {
         const { children, history } = this.props;
         const siderContent = this.getSiderContent();
+        const header = <DefaultLayoutHeader />;
         const footer = <span>{`Create with ❤️ by Kenkz447`}</span>;
         const childrenContent = (
             <DefaultLayoutContent>
@@ -119,6 +121,7 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
                                     width: 256,
                                     children: siderContent
                                 }}
+                                header={header}
                                 footer={footer}
                                 history={history}
                             >
@@ -133,6 +136,7 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
                                     width: 256,
                                     children: siderContent
                                 }}
+                                header={header}
                                 footer={footer}
                             >
                                 {childrenContent}

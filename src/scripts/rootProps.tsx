@@ -16,6 +16,7 @@ import {
     DecodedJWT,
     policies
 } from './domain';
+import { I18NLoader } from './i18n';
 import { LocalLoginResponseBody, User, userResources } from './restful';
 import { RouterRoot } from './routes';
 
@@ -41,13 +42,16 @@ const AppContent = () => (
         <LoadingBar style={{ backgroundColor: '#9980FA' }} />
         <ContextFetcher />
         <BreakpointDetector />
-        <RouterRoot />
+        <I18NLoader>
+            <RouterRoot />
+        </I18NLoader>
     </Authentication>
 );
 
 const initialContext: Partial<AppCoreContext> = {
     history: browserHistory,
-    policies: policies
+    policies: policies,
+    currentLanguage: localStorage.getItem('lang') || 'en'
 };
 
 export const getRootProps = (): RootProps => ({
