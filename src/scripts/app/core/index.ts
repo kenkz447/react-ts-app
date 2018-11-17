@@ -1,3 +1,5 @@
+export * from './Root';
 export * from './Types';
 export * from './route';
-export * from './Root';
+export { default as AccessControl } from './AccessControl';
+export { default as BreakpointDetector } from './BreakpointDetector';

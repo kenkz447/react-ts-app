@@ -2,7 +2,7 @@ import { createBrowserHistory } from 'history';
 import * as jwtDecode from 'jwt-decode';
 import * as React from 'react';
 
-import { AppCoreContext, RootProps } from './app';
+import { AppCoreContext, BreakpointDetector, RootProps } from './app';
 import { loginPath } from './configs';
 import {
     AuthClient,
@@ -36,8 +36,9 @@ const AppContent = () => (
     <Authentication authClient={authClient}>
         <ContextFetcher>
             <RouterRoot />
-            <LoadingBar />
         </ContextFetcher>
+        <BreakpointDetector />
+        <LoadingBar />
     </Authentication>
 );
 

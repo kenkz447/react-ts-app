@@ -5,11 +5,14 @@ import { AppCoreContext } from '@/app';
 
 export type Policy = (context: {}) => boolean;
 
+export type BreakPoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
 export interface AppCoreContext<U = {}> {
     readonly currentUser: U;
     readonly history: History;
     readonly appState?: 'LOADING' | 'READY';
     readonly policies?: { readonly [key: string]: Policy };
+    readonly currentBreakpoint: BreakPoint;
 }
 
 export interface RouteInfo extends RouteProps {
@@ -22,4 +25,13 @@ export interface RouteInfo extends RouteProps {
 
 export interface PageProps {
     readonly routeInfo: RouteInfo;
+}
+
+export interface Menu<P = {}> {
+    readonly isRoot?: boolean;
+    readonly label?: JSX.Element | string;
+    readonly href?: string;
+    readonly children?: Menu[];
+    readonly component: React.ComponentType<P>;
+    readonly componentProps?: P;
 }

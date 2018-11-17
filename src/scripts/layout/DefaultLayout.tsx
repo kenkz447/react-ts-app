@@ -1,7 +1,10 @@
+import { History } from 'history';
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { AntdLayout } from '@/components';
+import { AntdIcon, AntdLayout } from '@/components';
+
+import { DefaultLayoutSiderMenu } from './default-layout';
 
 const DefaultLayoutWrapper = styled.div`
     height: 100vh;
@@ -12,6 +15,13 @@ const DefaultLayoutWrapper = styled.div`
         &-header {
             box-shadow: 0 1px 4px rgba(0,21,41,.08);
         }
+    }
+    .sider-trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color .3s;
     }
 `;
 
@@ -44,29 +54,31 @@ const DefaultLayoutContent = styled.div`
 `;
 
 interface DefaultLayoutProps {
+    readonly history: History;
 }
 
 export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
     readonly state = {
-        collapsed: false,
+        siderCollapsed: false,
     };
 
-    readonly onCollapse = (collapsed) => {
+    readonly onSiderToggle = () => {
         this.setState({
-            collapsed
+            siderCollapsed: !this.state.siderCollapsed
         });
     }
 
     render() {
-        const { children } = this.props;
+        const { children, history } = this.props;
 
         return (
             <DefaultLayoutWrapper>
                 <AntdLayout style={{ minHeight: '100vh' }}>
                     <AntdLayout.Sider
+                        trigger={null}
                         collapsible={true}
-                        collapsed={this.state.collapsed}
-                        onCollapse={this.onCollapse}
+                        collapsed={this.state.siderCollapsed}
+                        onCollapse={this.onSiderToggle}
                         width={256}
                     >
                         <SiderLogo id="logo">
@@ -76,10 +88,18 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
                                 <h1>Ant Design Pro</h1>
                             </a>
                         </SiderLogo>
+                        <DefaultLayoutSiderMenu
+                            history={history}
+                            isSiderOpened={false}
+                        />
                     </AntdLayout.Sider>
                     <AntdLayout>
                         <AntdLayout.Header style={{ background: '#fff', padding: 0 }}>
-                            {null}
+                            <AntdIcon
+                                className="sider-trigger"
+                                type={this.state.siderCollapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={this.onSiderToggle}
+                            />
                         </AntdLayout.Header>
                         <AntdLayout.Content>
                             <DefaultLayoutContent>

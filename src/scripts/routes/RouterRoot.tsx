@@ -45,13 +45,13 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
     }
 
     readonly mainRouteComponent = ({ location }) => {
-        const { appState } = this.props;
+        const { appState, history } = this.props;
         if (appState !== 'READY') {
             return null;
         }
 
         return (
-            <DefaultLayout>
+            <DefaultLayout history={history}>
                 <Switch location={location}>
                     {mainRoutes}
                     <Route render={() => 'Page not found!'} />

@@ -13,7 +13,7 @@
         "jwt-decode": "^2.2.0",
         "lodash": "^4.17.10",
         "react": "^16.6.1",
-        "react-context-service": "^1.0.8",
+        "react-context-service": "^1.0.9",
         "react-dom": "^16.6.1",
         "react-restful": "^2.0.0-alpha.3",
         "react-router": "^4.2.0",
