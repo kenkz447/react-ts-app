@@ -1,5 +1,6 @@
 
 export * from './AntdAlert';
+export * from './AntdBreadcrumb';
 export * from './AntdButton';
 export * from './AntdCard';
 export * from './AntdDivider';

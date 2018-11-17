@@ -1,30 +1,26 @@
-import { Record, Resource, ResourceType } from 'react-restful';
+import { Resource, ResourceType } from 'react-restful';
 
-import { Salon } from './salon';
+import { Role } from './role';
 
-export interface User extends Record {
-    readonly activated: true;
+export interface User {
+    readonly id: string;
+    readonly name?: string;
     readonly email: string;
-    readonly firstName: string;
-    readonly id: number;
-    readonly imageUrl: string;
-    readonly langKey: string;
-    readonly lastName: string;
-    readonly login: string;
-    readonly name: string;
-    readonly salon: Salon;
-    readonly salonId: number;
+    readonly role: Role;
+    readonly username: string;
+    readonly confirmed?: boolean;
 }
 
-export interface DeletedUserMeta {
-    readonly deletedUser: User;
-}
-
-export const userResourceType = new ResourceType<User>(nameof<User>());
+export const userResourceType = new ResourceType<User>('User');
 
 export const userResources = {
-    findOne: new Resource<User>({
+    me: new Resource<User>({
         resourceType: userResourceType,
-        url: '/users/:id'
+        url: '/users/me'
+    }),
+    update: new Resource<User>({
+        resourceType: userResourceType,
+        url: '/users/:id',
+        method: 'PUT'
     })
 };

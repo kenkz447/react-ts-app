@@ -3,6 +3,7 @@ import * as React from 'react';
 import { RouteInfo } from '@/app';
 import { PageBase, PageWrapper } from '@/components';
 import { AppPageProps } from '@/domain';
+import { isRoot } from '@/domain/policies';
 
 type RouteHomeProps = AppPageProps;
 
@@ -11,11 +12,7 @@ export class RouteHome extends PageBase<RouteHomeProps> {
         path: '/',
         title: 'Tổng quan',
         exact: true,
-        isActive: () => {
-            const { routeInfo } = RouteHome;
-            const currentPath = window.location.pathname;
-            return currentPath === routeInfo.path;
-        }
+        policies: [isRoot]
     };
 
     render() {

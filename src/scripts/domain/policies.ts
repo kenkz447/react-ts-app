@@ -1,5 +1,5 @@
 import { DomainContext } from './Types';
 
-export const isAdminGroup = (context: DomainContext) => {
+export function isRoot(context: DomainContext) {
     return true;
-};
+}

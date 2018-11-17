@@ -13,11 +13,7 @@ export class RouteProfile extends PageBase<RouteProfileProps> {
         path: '/profile',
         title: 'Profile',
         exact: true,
-        isActive: () => {
-            const { routeInfo } = RouteProfile;
-            const currentPath = window.location.pathname;
-            return currentPath === routeInfo.path;
-        }
+        policies: ['isRoot']
     };
 
     render() {

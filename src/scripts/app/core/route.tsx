@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
+import AccessControl from './AccessControl';
 import { PageProps, RouteInfo } from './Types';
 
 type PageContructor = {
@@ -20,6 +21,22 @@ export const route = (Component: AppRouteComponent) => {
     const initialContext = Component.withContext || [];
 
     const WithContextInject = withContext(...initialContext)(Component);
+
+    if (routeProps.policies) {
+        return (
+            <Route key={routeProps.path} {...routeProps}>
+                <AccessControl allowFor={routeProps.policies}>
+                    {(canAccess) => {
+                        if (!canAccess) {
+                            return <Redirect to="/access-deny" />;
+                        }
+
+                        return <WithContextInject />;
+                    }}
+                </AccessControl>
+            </Route>
+        );
+    }
 
     return (
         <Route key={routeProps.path} {...routeProps} component={WithContextInject} />

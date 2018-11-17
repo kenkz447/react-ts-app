@@ -25,20 +25,7 @@ class ContextFetcher extends React.PureComponent<ContextFetcherProps> {
         const { setContext, currentUser } = this.props;
 
         try {
-            let salon = currentUser.salon;
-            if (!salon) {
-                salon = await request(
-                    salonResources.getById,
-                    {
-                        type: 'path',
-                        parameter: 'id',
-                        value: currentUser.salonId
-                    }
-                );
-            }
-
             setContext({
-                currentSalon: salon,
                 appState: 'READY'
             });
         } catch (error) {

@@ -1,3 +1,4 @@
+import PageHeader, { IPageHeaderProps } from 'ant-design-pro/lib/PageHeader';
 import * as React from 'react';
 import styled from 'styled-components';
 
@@ -12,13 +13,13 @@ const PageWrapperContent = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
-    padding: 0;
+    padding: 24px;
     background-color: ${(props: PageWrapperContentProps) => props.backgroundColor};
 `;
 
 interface PageWrapperProps extends PageWrapperContentProps {
     readonly className?: string;
+    readonly headerProps?: IPageHeaderProps;
 }
 
 export class PageWrapper extends React.Component<PageWrapperProps> {
@@ -29,12 +30,13 @@ export class PageWrapper extends React.Component<PageWrapperProps> {
     }
 
     render() {
-        const { backgroundColor, className } = this.props;
+        const { backgroundColor, className, headerProps } = this.props;
         return (
             <PageWrapperContent
                 className={className}
                 backgroundColor={backgroundColor}
             >
+                {headerProps && <PageHeader {...headerProps} />}
                 {this.props.children}
             </PageWrapperContent>
         );
