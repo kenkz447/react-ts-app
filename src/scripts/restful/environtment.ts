@@ -1,6 +1,6 @@
+import { notification } from 'antd';
 import { setupEnvironment, Store } from 'react-restful';
 
-import { AntdNotification } from '@/components';
 import { getToken } from '@/utilities';
 
 import { FormikFactory } from './form';
@@ -46,7 +46,7 @@ const environment = setupEnvironment({
             error = await response.text();
         }
 
-        AntdNotification.info({
+        notification.info({
             message: 'Fetch error!',
             description: response.statusText,
         });

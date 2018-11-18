@@ -1,8 +1,9 @@
+import { Divider } from 'antd';
 import { FormikProps } from 'formik';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AntdDivider, FormInput, FormSubmit, FromBody } from '@/components';
+import { FormInput, FormSubmit, FromBody } from '@/components';
 import { loginPath } from '@/configs';
 import { text } from '@/i18n';
 import { ForgotPasswordRequestBody } from '@/restful';
@@ -34,7 +35,7 @@ export function ForgotPasswordForm(props: ForgotPasswordFormOwnProps) {
             >
                 {text('Recovery password')}
             </FormSubmit>
-            <AntdDivider dashed={true} />
+            <Divider dashed={true} />
             <Link to={loginPath} replace={true}>
                 {text('Go to login page')}
             </Link>

@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { RouteInfo } from '@/app';
-import { PageBase, PageWrapper } from '@/components';
+import { PageWrapper } from '@/components';
 import { forgotPasswordPath } from '@/configs';
-import { AppPageProps } from '@/domain';
+import { AppPageProps, RoutePage } from '@/domain';
 
 import { ForgotPasswordPageContainer } from './containers';
 
 type RouteAuthForgotPasswordProps = AppPageProps;
 
-export class RouteAuthForgotPassword extends PageBase<RouteAuthForgotPasswordProps> {
+export class RouteAuthForgotPassword extends RoutePage<RouteAuthForgotPasswordProps> {
     static readonly routeInfo: RouteInfo = {
         path: forgotPasswordPath,
         title: 'Đăng nhập',

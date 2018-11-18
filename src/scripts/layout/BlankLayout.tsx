@@ -1,17 +1,6 @@
+import { Layout } from 'antd';
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { RouteInfo } from '@/app';
-import { AntdDivider } from '@/components';
-import { AntdLayout } from '@/components/antd/AntdLayout';
-import { RouteHome } from '@/routes/route-home';
-import { RouteProfile } from '@/routes/route-profile';
-
-const menuItems: RouteInfo[] = [
-    RouteHome.routeInfo,
-    RouteProfile.routeInfo
-];
 
 const BlankLayoutWrapper = styled.div`
     height: 100vh;
@@ -33,16 +22,16 @@ export class BlankLayout extends React.Component<BlankLayoutProps> {
 
         return (
             <BlankLayoutWrapper>
-                <AntdLayout>
-                    <AntdLayout.Content className="display-flex">
+                <Layout>
+                    <Layout.Content className="display-flex">
                         <BlankLayoutContent>
                             {children}
                         </BlankLayoutContent>
-                    </AntdLayout.Content>
-                    <AntdLayout.Footer style={{ textAlign: 'center' }}>
+                    </Layout.Content>
+                    <Layout.Footer style={{ textAlign: 'center' }}>
                         {`Create with ❤️ by Kenkz447`}
-                    </AntdLayout.Footer>
-                </AntdLayout>
+                    </Layout.Footer>
+                </Layout>
             </BlankLayoutWrapper>
         );
     }

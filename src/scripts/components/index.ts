@@ -1,3 +1,4 @@
-export * from './antd';
-export * from './domain';
 export * from './formik';
+export * from './generic';
+export * from './structures';
+export * from './base';

@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { RouteInfo } from '@/app';
-import { AppPageProps } from '@/domain';
 
-export class PageBase<P extends AppPageProps = AppPageProps, S= {}>
+import { AppPageProps } from './base';
+
+export class RoutePage<P extends AppPageProps = AppPageProps, S= {}>
     extends React.PureComponent<P, S> {
 
     constructor(props: P) {

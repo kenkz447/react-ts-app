@@ -1,7 +1,6 @@
+import { Icon, Layout } from 'antd';
 import { SiderProps } from 'antd/lib/layout';
 import * as React from 'react';
-
-import { AntdIcon, AntdLayout } from '@/components';
 
 export interface DefaultLayoutDesktopProps {
     readonly header: JSX.Element;
@@ -15,29 +14,29 @@ export const DefaultLayoutDesktop = React.memo((props: DefaultLayoutDesktopProps
 
     const { siderProps, children, footer, header } = props;
     return (
-        <AntdLayout style={{ minHeight: '100vh' }}>
-            <AntdLayout.Sider
+        <Layout style={{ minHeight: '100vh' }}>
+            <Layout.Sider
                 {...siderProps}
                 collapsed={siderCollapsed}
             />
-            <AntdLayout>
-                <AntdLayout.Header style={{ background: '#fff', padding: 0 }}>
+            <Layout>
+                <Layout.Header style={{ background: '#fff', padding: 0 }}>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <AntdIcon
+                        <Icon
                             className="sider-trigger"
                             type={siderProps.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={() => setSiderCollapsed(!siderCollapsed)}
                         />
                         {header}
                     </div>
-                </AntdLayout.Header>
-                <AntdLayout.Content>
+                </Layout.Header>
+                <Layout.Content>
                     {children}
-                </AntdLayout.Content>
-                <AntdLayout.Footer style={{ textAlign: 'center' }}>
+                </Layout.Content>
+                <Layout.Footer style={{ textAlign: 'center' }}>
                     {footer}
-                </AntdLayout.Footer>
-            </AntdLayout>
-        </AntdLayout>
+                </Layout.Footer>
+            </Layout>
+        </Layout>
     );
 });

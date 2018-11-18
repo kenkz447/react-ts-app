@@ -1,8 +1,7 @@
+import { Alert } from 'antd';
 import { FormikProps } from 'formik';
 import * as React from 'react';
 import styled from 'styled-components';
-
-import { AntdAlert } from '../antd';
 
 const FormikErrorError = styled.div`
     margin-bottom: 24px;
@@ -19,7 +18,7 @@ export function FormikError(props: FormikErrorProps) {
 
     return (
         <FormikErrorError>
-            <AntdAlert type="error" message={props.formProps.status.error} />
+            <Alert type="error" message={props.formProps.status.error} />
         </FormikErrorError>
     );
 }

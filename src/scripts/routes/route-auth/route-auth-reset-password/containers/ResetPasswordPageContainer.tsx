@@ -1,6 +1,6 @@
+import { Card } from 'antd';
 import * as React from 'react';
 
-import { AntdCard } from '@/components';
 import { ResetPasswordFormControl } from '@/forms';
 import { text } from '@/i18n';
 import {
@@ -16,7 +16,7 @@ export class ResetPasswordPageContainer extends React.PureComponent {
 
         return (
             <AuthCard>
-                <AntdCard>
+                <Card>
                     <React.Fragment>
                         <AuthCardHeader>{text('Reset password')}</AuthCardHeader>
                         <AuthCardDescription>
@@ -28,7 +28,7 @@ export class ResetPasswordPageContainer extends React.PureComponent {
                             }}
                         />
                     </React.Fragment>
-                </AntdCard>
+                </Card>
             </AuthCard>
         );
     }

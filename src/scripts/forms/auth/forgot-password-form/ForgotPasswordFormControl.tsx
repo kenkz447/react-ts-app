@@ -1,6 +1,6 @@
+import { Modal } from 'antd';
 import { withContext } from 'react-context-service';
 
-import { AntdModal } from '@/components';
 import { loginPath } from '@/configs';
 import { WithHistory } from '@/domain';
 import { text } from '@/i18n';
@@ -13,7 +13,7 @@ export const ForgotPasswordFormControl = formFactory.create({
     component: ForgotPasswordForm,
     resource: authResources.forgotPassword,
     onSusscess: (value, props: WithHistory) => {
-        AntdModal.success({
+        Modal.success({
             title: text('Reset password mail was sended!'),
             content: text('Please check your inbox(includes SPAM folder)!'),
             maskClosable: false,

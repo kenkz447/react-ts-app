@@ -1,8 +1,8 @@
+import { Drawer, Icon, Layout } from 'antd';
 import { SiderProps } from 'antd/lib/layout';
 import { UnregisterCallback } from 'history';
 import * as React from 'react';
 
-import { AntdDrawer, AntdIcon, AntdLayout } from '@/components';
 import { WithHistory } from '@/domain';
 
 export interface DefaultLayoutMobileProps extends WithHistory {
@@ -49,37 +49,37 @@ export class DefaultLayoutMobile extends React.Component<DefaultLayoutMobileProp
         const { siderProps, children, footer, header } = this.props;
         return (
             <React.Fragment>
-                <AntdLayout style={{ minHeight: '100vh' }}>
-                    <AntdLayout.Header style={{ background: '#fff', padding: 0 }}>
+                <Layout style={{ minHeight: '100vh' }}>
+                    <Layout.Header style={{ background: '#fff', padding: 0 }}>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
-                            <AntdIcon
+                            <Icon
                                 className="sider-trigger"
                                 type={siderProps.collapsed ? 'menu-unfold' : 'menu-fold'}
                                 onClick={this.onDrawerToggle}
                             />
                             {header}
                         </div>
-                    </AntdLayout.Header>
-                    <AntdLayout.Content>
+                    </Layout.Header>
+                    <Layout.Content>
                         {children}
-                    </AntdLayout.Content>
-                    <AntdLayout.Footer style={{ textAlign: 'center' }}>
+                    </Layout.Content>
+                    <Layout.Footer style={{ textAlign: 'center' }}>
                         {footer}
-                    </AntdLayout.Footer>
-                </AntdLayout>
-                <AntdDrawer
+                    </Layout.Footer>
+                </Layout>
+                <Drawer
                     placement="left"
                     closable={true}
                     onClose={this.onDrawerToggle}
                     visible={this.state.drawerVisibled}
                     style={{ padding: 0, height: '100vh' }}
                 >
-                    <AntdLayout.Sider
+                    <Layout.Sider
                         style={{ minHeight: '100vh', zIndex: 10 }}
                         {...siderProps}
                         collapsed={false}
                     />
-                </AntdDrawer>
+                </Drawer>
             </React.Fragment>
         );
     }

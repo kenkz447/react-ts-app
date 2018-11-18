@@ -1,7 +1,6 @@
+import { Icon, Menu } from 'antd';
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
 
-import { AntdIcon, AntdMenu } from '@/components';
 import {
     DASHBOARD_TITLE,
     DASHBOARD_URL,
@@ -9,7 +8,6 @@ import {
     USER_PROFILE_URL,
     USER_URL_PREFIX
 } from '@/configs';
-import { WithHistory } from '@/domain';
 import { text } from '@/i18n';
 
 interface DefaultLayoutSiderMenu {
@@ -24,7 +22,7 @@ export function DefaultLayoutSiderMenu(props: DefaultLayoutSiderMenu) {
     }
 
     return (
-        <AntdMenu
+        <Menu
             mode="inline"
             style={{ width: '100%' }}
             theme="dark"
@@ -32,24 +30,24 @@ export function DefaultLayoutSiderMenu(props: DefaultLayoutSiderMenu) {
             defaultSelectedKeys={[location.pathname]}
             onClick={({ key }) => onMenuItemClick(key)}
         >
-            <AntdMenu.Item key={DASHBOARD_URL}>
-                <AntdIcon type="dashboard" />
+            <Menu.Item key={DASHBOARD_URL}>
+                <Icon type="dashboard" />
                 <span>{text(DASHBOARD_TITLE)}</span>
-            </AntdMenu.Item>
-            <AntdMenu.SubMenu
+            </Menu.Item>
+            <Menu.SubMenu
                 key={USER_URL_PREFIX}
                 title={(
                     <span>
-                        <AntdIcon type="user" />
+                        <Icon type="user" />
                         <span>{text('User')}</span>
                     </span>
                 )}
             >
-                <AntdMenu.Item key={USER_PROFILE_URL}>
-                    <AntdIcon type="idcard" />
+                <Menu.Item key={USER_PROFILE_URL}>
+                    <Icon type="idcard" />
                     <span>{text(PROFILE_TITLE)}</span>
-                </AntdMenu.Item>
-            </AntdMenu.SubMenu>
-        </AntdMenu>
+                </Menu.Item>
+            </Menu.SubMenu>
+        </Menu>
     );
 }

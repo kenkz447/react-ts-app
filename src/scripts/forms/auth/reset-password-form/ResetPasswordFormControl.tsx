@@ -1,6 +1,6 @@
+import { Modal } from 'antd';
 import { withContext } from 'react-context-service';
 
-import { AntdModal } from '@/components';
 import { loginPath } from '@/configs';
 import { WithHistory } from '@/domain';
 import { text } from '@/i18n';
@@ -16,7 +16,7 @@ export const ResetPasswordFormControl = formFactory.create<FormProps<ResetPasswo
     component: ResetPasswordForm,
     resource: authResources.resetPassword,
     onSusscess: (value, props: WithHistory) => {
-        AntdModal.success({
+        Modal.success({
             title: text('Reset completed'),
             content: text('Please login with your new password!'),
             maskClosable: false,

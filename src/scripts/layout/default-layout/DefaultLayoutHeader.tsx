@@ -1,7 +1,6 @@
+import { Icon } from 'antd';
 import * as React from 'react';
 import styled from 'styled-components';
-
-import { AntdIcon } from '@/components';
 
 const DefaultLayoutHeaderWrapper = styled.div`
     padding: 0 24px;
@@ -17,7 +16,7 @@ export function DefaultLayoutHeader(props: DefaultLayoutHeaderProps) {
         <DefaultLayoutHeaderWrapper>
             <div style={{ flexGrow: 1 }} />
             <div>
-                <AntdIcon type="global" />
+                <Icon type="global" />
             </div>
         </DefaultLayoutHeaderWrapper>
     );

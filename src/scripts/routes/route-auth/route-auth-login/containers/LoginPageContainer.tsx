@@ -1,6 +1,6 @@
+import { Card } from 'antd';
 import * as React from 'react';
 
-import { AntdCard } from '@/components';
 import { LoginFormControl } from '@/forms';
 import {
     AuthCard,
@@ -12,7 +12,7 @@ export class LoginPageContainer extends React.PureComponent {
     render() {
         return (
             <AuthCard>
-                <AntdCard>
+                <Card>
                     <React.Fragment>
                         <AuthCardHeader>Login</AuthCardHeader>
                         <AuthCardDescription>
@@ -20,7 +20,7 @@ export class LoginPageContainer extends React.PureComponent {
                         </AuthCardDescription>
                         <LoginFormControl />
                     </React.Fragment>
-                </AntdCard>
+                </Card>
             </AuthCard>
         );
     }
