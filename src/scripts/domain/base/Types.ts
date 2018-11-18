@@ -13,6 +13,7 @@ export interface DomainContext extends AppCoreContext<User> {
     readonly showPageLoading?: boolean;
 }
 
+export type WithCurrentUser = Pick<DomainContext, 'currentUser'>;
 export type WithAuthClient = Pick<DomainContext, 'authClient'>;
 export type WithHistory = Pick<DomainContext, 'history'>;
 

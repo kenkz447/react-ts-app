@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 
-import { AppCoreContext } from '../app/core';
-
-// tslint:disable-next-line:interface-name
-export interface I18NProps {
-}
+import { AppCoreContext } from '@/app';
 
 // tslint:disable-next-line:interface-name
 interface I18NState {
@@ -13,9 +9,11 @@ interface I18NState {
     readonly needsUpdate?: boolean;
 }
 
-class I18NLoader extends React.PureComponent<WithContextProps<AppCoreContext, I18NProps>, I18NState> {
+type I18NLoaderContext = Pick<AppCoreContext, 'currentLanguage'>;
+
+class I18NLoader extends React.PureComponent<WithContextProps<I18NLoaderContext>, I18NState> {
     static getDerivedStateFromProps(
-        nextProps: WithContextProps<AppCoreContext, I18NProps>,
+        nextProps: WithContextProps<I18NLoaderContext>,
         state: I18NState
     ): I18NState | null {
         if (nextProps.currentLanguage !== state.currentLanguage) {
@@ -27,17 +25,11 @@ class I18NLoader extends React.PureComponent<WithContextProps<AppCoreContext, I1
         return null;
     }
 
-    constructor(props: WithContextProps<AppCoreContext, I18NProps>) {
+    constructor(props: WithContextProps<I18NLoaderContext>) {
         super(props);
-        const { setContext } = props;
-
         this.state = {
-            currentLanguage: 'en'
+            currentLanguage: props.currentLanguage
         };
-
-        setContext({
-
-        });
     }
 
     componentDidUpdate() {
@@ -50,7 +42,7 @@ class I18NLoader extends React.PureComponent<WithContextProps<AppCoreContext, I1
         }
     }
 
-    public render() {
+    render() {
         if (this.state.needsUpdate) {
             return null;
         }
@@ -59,4 +51,4 @@ class I18NLoader extends React.PureComponent<WithContextProps<AppCoreContext, I1
     }
 }
 
-export default withContext<AppCoreContext, I18NProps>('currentLanguage')(I18NLoader);
+export default withContext<AppCoreContext>('currentLanguage')(I18NLoader);

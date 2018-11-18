@@ -13,7 +13,7 @@ export interface AppCoreContext<U = {}> {
     readonly appState?: 'LOADING' | 'READY';
     readonly policies?: { readonly [key: string]: Policy };
     readonly currentBreakpoint: BreakPoint;
-    readonly currentLanguage?: string;
+    readonly currentLanguage: string;
     readonly translations?: { readonly [key: string]: object };
 }
 

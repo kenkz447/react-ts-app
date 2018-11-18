@@ -1,6 +1,5 @@
 import { Form, Icon, Input } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
-import FormItem from 'antd/lib/form/FormItem';
 import { InputProps } from 'antd/lib/input';
 import * as React from 'react';
 
@@ -20,14 +19,14 @@ function FormInputComponent(props: FormFieldProps) {
 
     if (useFieldWrapper) {
         return (
-            <FormItem
+            <Form.Item
                 label={label}
                 required={required}
                 help={help}
                 validateStatus={validateStatus}
             >
                 {input}
-            </FormItem>
+            </Form.Item>
         );
     }
 
