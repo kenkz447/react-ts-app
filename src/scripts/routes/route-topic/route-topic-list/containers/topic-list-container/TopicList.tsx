@@ -31,7 +31,12 @@ export class TopicList extends React.PureComponent<TopicListProps> {
                             </Avatar>
                         )}
                         title={(
-                            <Link to={replaceRoutePath(TOPICS_DETAIL_PATH, topic)}>
+                            <Link
+                                to={{
+                                    pathname: replaceRoutePath(TOPICS_DETAIL_PATH, topic),
+                                    state: topic
+                                }}
+                            >
                                 {topic.name}
                             </Link>
                         )}
@@ -42,19 +47,13 @@ export class TopicList extends React.PureComponent<TopicListProps> {
                             <Col span={6} style={{ display: 'flex', alignItems: 'center' }}>
                                 <div>
                                     <small>{text('Word count')}</small>
-                                    <br />
-                                    <span>
-                                        {0}
-                                    </span>
+                                    <div>{0}</div>
                                 </div>
                             </Col>
                             <Col span={10} style={{ display: 'flex', alignItems: 'center' }}>
                                 <div style={{ minWidth: 150 }}>
                                     <small>{text('Created at ')}</small>
-                                    <br />
-                                    <span>
-                                        {topic.createdAt}
-                                    </span>
+                                    <div>{topic.createdAt}</div>
                                 </div>
                             </Col>
                             <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>

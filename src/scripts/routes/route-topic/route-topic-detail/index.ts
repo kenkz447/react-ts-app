@@ -1,1 +1,1 @@
-export * from './RouteTopicsNew';
+export * from './RouteTopicDetail';

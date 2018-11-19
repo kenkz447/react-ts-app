@@ -52,7 +52,7 @@ export class RouteTopicList extends RoutePage<RouteTopicsProps> {
         return (
             <PageWrapper headerProps={this.getHeaderProps()}>
                 <PageContent>
-                    <Card>
+                    <Card bordered={false}>
                         <TopicListContainer />
                     </Card>
                 </PageContent>
