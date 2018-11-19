@@ -81,10 +81,10 @@
         "clean": "rimraf ./dist",
         "copy-bin": "ncp ./bin ./dist",
         "build": "npm run build:staging",
-        "build:staging": "npm run clean && npm run build:staging-webpack && npm run copy-bin",
-        "build:staging-webpack": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.staging.js",
+        "build:staging": "npm run clean && npm run copy-bin && npm run build:staging-webpack",
+        "build:staging-webpack": "cross-env NODE_ENV=production webpack --progress --config ./webpack/webpack.config.staging.js",
         "analyzer": "npm run clean && npm run analyzer:build",
-        "analyzer:build": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.analyzer.js"
+        "analyzer:build": "cross-env NODE_ENV=production webpack --progress --config ./webpack/webpack.config.analyzer.js"
     },
     "license": "MIT",
     "author": {

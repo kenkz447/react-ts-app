@@ -38,8 +38,7 @@ module.exports = function getBuildConfig(options) {
     if (options.sourceMap) {
         plugins.push(new webpack.SourceMapDevToolPlugin({
             filename: '[name].[chunkhash].js.map',
-            include: /\.js$/,
-            exclude: [/vendors/g],
+            include: [/app/]
         }));
     }
 
@@ -68,6 +67,12 @@ module.exports = function getBuildConfig(options) {
 
     return ({
         mode: 'production',
+        stats: {
+            colors: true,
+            entrypoints: false,
+            children: false,
+            modules: false
+        },
         entry: {
             app: './src/index'
         },
@@ -92,9 +97,11 @@ module.exports = function getBuildConfig(options) {
             splitChunks: {
                 cacheGroups: {
                     vendors: {
+                        name: 'vendors',
                         test: /[\\/]node_modules[\\/]/,
                         priority: -10,
-                        chunks: 'initial'
+                        chunks: 'initial',
+                        maxSize: 2440000,
                     },
                     default: {
                         minChunks: 2,
