@@ -2,11 +2,11 @@ const path = require('path')
 const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const OfflinePlugin = require('offline-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const common = require('./common');
 
@@ -73,10 +73,13 @@ module.exports = function getBuildConfig(options) {
             concatenateModules: true,
             noEmitOnErrors: true,
             namedModules: true,
-            minimizer: [new UglifyJsPlugin({
-                cache: true,
-                sourceMap: options.sourceMap
-            })],
+            minimizer: [
+                new TerserPlugin({
+                    cache: true,
+                    sourceMap: options.sourceMap,
+                    parallel: true
+                })
+            ],
             runtimeChunk: 'single',
             splitChunks: {
                 cacheGroups: {
@@ -96,38 +99,38 @@ module.exports = function getBuildConfig(options) {
         plugins: plugins,
         module: {
             rules: [
-            {
-                test: /\.(css|sass|scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader'
-                    }, {
-                        loader: 'resolve-url-loader',
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            includePaths: [path.resolve(__dirname, 'src')]
-                        }
-                    }]
-                })
-            }, {
-                test: /\.(less)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader'
-                    }, {
-                        loader: 'resolve-url-loader',
-                    }, {
-                        loader: 'less-loader',
-                        options: common.lessLoaderOptions
-                    }]
-                })
-            },
-            common.modules.rules.typescript,
-            common.modules.rules.fonts,
-            common.modules.rules.images
+                {
+                    test: /\.(css|sass|scss)$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [{
+                            loader: 'css-loader'
+                        }, {
+                            loader: 'resolve-url-loader',
+                        }, {
+                            loader: 'sass-loader',
+                            options: {
+                                includePaths: [path.resolve(__dirname, 'src')]
+                            }
+                        }]
+                    })
+                }, {
+                    test: /\.(less)$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [{
+                            loader: 'css-loader'
+                        }, {
+                            loader: 'resolve-url-loader',
+                        }, {
+                            loader: 'less-loader',
+                            options: common.lessLoaderOptions
+                        }]
+                    })
+                },
+                common.modules.rules.typescript,
+                common.modules.rules.fonts,
+                common.modules.rules.images
             ]
         },
         resolve: common.resolve
