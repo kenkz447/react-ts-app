@@ -18,7 +18,7 @@
             "esnext.asynciterable"
         ],
         "moduleResolution": "node",
-        "module": "commonjs",
+        "module": "esnext",
         "noImplicitAny": false,
         "removeComments": true,
         "sourceMap": true,

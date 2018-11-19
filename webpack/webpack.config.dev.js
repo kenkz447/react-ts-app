@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+
+const common = require('./common');
 
 module.exports = {
     mode: 'development',
@@ -26,16 +27,14 @@ module.exports = {
         new ErrorOverlayPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
+        new webpack.NamedChunksPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             inject: 'body'
         })
     ],
     module: {
-        rules: [{
-            test: /\.tsx?$/,
-            loaders: ['ts-loader', 'ts-nameof-loader']
-        },
+        rules: [
         {
             test: /\.(css|sass|scss|less)$/,
             use: [{
@@ -56,34 +55,12 @@ module.exports = {
         }, {
             test: /(\.less)$/,
             loader: 'less-loader',
-            options: {
-                paths: [path.resolve(__dirname, "node_modules")],
-                javascriptEnabled: true,
-                modifyVars: {
-                    '@blue-6': '#9980FA',
-                    '@font-family': "'Roboto Mono', monospace",
-                    '@font-size-base': '13px',
-                    '@font-size-sm': '11px'
-                }
-            }
+            options: common.lessLoaderOptions
         },
-        {
-            test: /\.(eot|svg|ttf|woff|woff2)$/,
-            use: [{
-                loader: 'file-loader?name=[name].[ext]'
-            }]
-        },
-        {
-            test: /\.(jpe?g|png|gif|svg)$/i,
-            use: [{
-                loader: 'file-loader?name=[name].[ext]'
-            }]
-        }
+        common.modules.rules.typescript,
+        common.modules.rules.fonts,
+        common.modules.rules.images
         ]
     },
-    resolve: {
-        modules: ['node_modules'],
-        extensions: ['.js', '.ts', '.tsx'],
-        plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })]
-    }
+    resolve: common.resolve
 };

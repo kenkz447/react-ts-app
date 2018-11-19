@@ -4,28 +4,30 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin')
 const OfflinePlugin = require('offline-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const common = require('./common');
+
+function makeDefinitions(definitionValues) {
+    return Object.keys(definitionValues).reduce(
+        (definitionObj, key) => Object.assign(definitionObj, { key: JSON.stringify(options.definitions[key]) }))
+}
+
 module.exports = function getBuildConfig(options) {
     const plugins = [];
 
-    const definitions = Object.keys(options.definitions || {}).reduce(
-        (definitionObj, key) => Object.assign(definitionObj, { key: JSON.stringify(options.definitions[key]) }),
-        {
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }
-    )
-
-    plugins.push(new webpack.DefinePlugin(definitions));
+    const definitions = options.definitions && makeDefinitions(options.definitions)
+    if (definitions) {
+        plugins.push(new webpack.DefinePlugin(definitions));
+    }
 
     if (options.analyzer) {
         plugins.push(new BundleAnalyzerPlugin());
     }
 
-    plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+    plugins.push(new webpack.NamedChunksPlugin());
 
     plugins.push(new ExtractTextPlugin({
         filename: '[name].[hash].css',
@@ -68,7 +70,13 @@ module.exports = function getBuildConfig(options) {
             chunkFilename: '[name].[chunkhash].js'
         },
         optimization: {
-            minimizer: [new UglifyJsPlugin({ cache: true, sourceMap: true })],
+            concatenateModules: true,
+            noEmitOnErrors: true,
+            namedModules: true,
+            minimizer: [new UglifyJsPlugin({
+                cache: true,
+                sourceMap: options.sourceMap
+            })],
             runtimeChunk: 'single',
             splitChunks: {
                 cacheGroups: {
@@ -87,10 +95,7 @@ module.exports = function getBuildConfig(options) {
         },
         plugins: plugins,
         module: {
-            rules: [{
-                test: /\.tsx?$/,
-                loaders: ['ts-loader', 'ts-nameof-loader']
-            },
+            rules: [
             {
                 test: /\.(css|sass|scss)$/,
                 use: ExtractTextPlugin.extract({
@@ -104,12 +109,6 @@ module.exports = function getBuildConfig(options) {
                         options: {
                             includePaths: [path.resolve(__dirname, 'src')]
                         }
-                    }, {
-                        loader: 'less-loader',
-                        options: {
-                            paths: [path.resolve(__dirname, "node_modules")],
-                            javascriptEnabled: true
-                        }
                     }]
                 })
             }, {
@@ -122,39 +121,15 @@ module.exports = function getBuildConfig(options) {
                         loader: 'resolve-url-loader',
                     }, {
                         loader: 'less-loader',
-                        options: {
-                            paths: [path.resolve(__dirname, "node_modules")],
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                modifyVars: {
-                                    '@blue-6': '#9980FA',
-                                    '@font-family': "'Roboto Mono', monospace",
-                                    '@font-size-base': '13px',
-                                    '@font-size-sm': '11px'
-                                }
-                            }
-                        }
+                        options: common.lessLoaderOptions
                     }]
                 })
-            }, {
-                test: /\.(eot|svg|ttf|woff|woff2)$/,
-                use: [{
-                    loader: 'file-loader?name=fonts/[name].[ext]'
-                }]
             },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                exclude: /fonts/,
-                use: [{
-                    loader: 'file-loader?name=images/[name].[ext]'
-                }]
-            }
+            common.modules.rules.typescript,
+            common.modules.rules.fonts,
+            common.modules.rules.images
             ]
         },
-        resolve: {
-            modules: ['node_modules'],
-            extensions: ['.js', '.ts', '.tsx'],
-            plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })]
-        }
+        resolve: common.resolve
     })
 }
