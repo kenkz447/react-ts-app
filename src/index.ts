@@ -14,7 +14,15 @@ if (module.hot) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    require('offline-plugin/runtime').install();
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('/static/service-worker.js')
+            .then(registration => {
+                console.info('SW registered: ', registration);
+            }).catch(registrationError => {
+                console.info('SW registration failed: ', registrationError);
+            });
+    });
 } else {
     const { whyDidYouUpdate } = require('why-did-you-update');
     whyDidYouUpdate(React, {

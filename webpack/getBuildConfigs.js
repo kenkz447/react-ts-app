@@ -4,15 +4,16 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require('compression-webpack-plugin')
-const OfflinePlugin = require('offline-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const common = require('./common');
 
 function makeDefinitions(definitionValues) {
     return Object.keys(definitionValues).reduce(
-        (definitionObj, key) => Object.assign(definitionObj, { key: JSON.stringify(options.definitions[key]) }))
+        (definitionObj, key) => Object.assign(definitionObj, { [key]: JSON.stringify(definitionValues[key]) }), {})
 }
 
 module.exports = function getBuildConfig(options) {
@@ -56,7 +57,14 @@ module.exports = function getBuildConfig(options) {
         inject: 'body'
     }));
 
-    plugins.push(new OfflinePlugin());
+    plugins.push(new CopyWebpackPlugin([
+        { from: './static' },
+    ]));
+
+    plugins.push(new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true
+    }));
 
     return ({
         mode: 'production',

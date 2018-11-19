@@ -7,6 +7,7 @@
         "ant-design-pro": "^2.1.1",
         "antd": "^3.10.8",
         "classnames": "2.2.6",
+        "copy-webpack-plugin": "^4.6.0",
         "formik": "^1.3.2",
         "history": "^4.7.2",
         "js-cookie": "^2.2.0",
@@ -45,7 +46,6 @@
         "mini-css-extract-plugin": "^0.4.4",
         "ncp": "^2.0.0",
         "node-sass": "^4.10.0",
-        "offline-plugin": "^5.0.6",
         "react-hot-loader": "^4.3.12",
         "resolve-url-loader": "^3.0.0",
         "rimraf": "^2.6.2",
@@ -70,7 +70,8 @@
         "webpack-bundle-analyzer": "^3.0.2",
         "webpack-cli": "^3.1.2",
         "webpack-dev-server": "^3.1.10",
-        "webpack-env": "^0.8.0"
+        "webpack-env": "^0.8.0",
+        "workbox-webpack-plugin": "^3.6.3"
     },
     "name": "react-ts-app",
     "scripts": {
@@ -78,11 +79,10 @@
         "tslint": "tslint --fix --project tsconfig.json",
         "start": "node devServer.js",
         "clean": "rimraf ./dist",
+        "copy-bin": "ncp ./bin ./dist",
         "build": "npm run build:staging",
-        "build:staging": "npm run clean && npm run build:staging-webpack && npm run build:copy-static && npm run build:copy-bin",
+        "build:staging": "npm run clean && npm run build:staging-webpack && npm run copy-bin",
         "build:staging-webpack": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.staging.js",
-        "build:copy-static": "ncp ./static ./dist/static",
-        "build:copy-bin": "ncp ./bin ./dist",
         "analyzer": "npm run clean && npm run analyzer:build",
         "analyzer:build": "cross-env NODE_ENV=production webpack --display=errors-only --progress --colors --config ./webpack/webpack.config.analyzer.js"
     },
