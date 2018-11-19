@@ -8,7 +8,16 @@ interface FormFieldProps extends InputProps, FormItemProps {
 }
 
 function FormInputComponent(props: FormFieldProps) {
-    const { useFieldWrapper, label, required, help, prefix, validateStatus, ...rest } = props;
+    const {
+        useFieldWrapper,
+        label,
+        required,
+        help,
+        prefix,
+        validateStatus,
+        labelCol,
+        wrapperCol,
+        ...rest } = props;
 
     const inputPrefix =
         (prefix && typeof prefix === 'string' && prefix.startsWith('adi')) ?
@@ -20,6 +29,8 @@ function FormInputComponent(props: FormFieldProps) {
     if (useFieldWrapper) {
         return (
             <Form.Item
+                labelCol={labelCol}
+                wrapperCol={wrapperCol}
                 label={label}
                 required={required}
                 help={help}

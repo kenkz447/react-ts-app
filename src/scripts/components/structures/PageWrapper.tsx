@@ -2,6 +2,7 @@ import 'ant-design-pro/lib/PageHeader/style/css';
 
 import { IPageHeaderProps } from 'ant-design-pro/lib/PageHeader';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PageHeader = require('ant-design-pro/lib/PageHeader');
@@ -23,25 +24,53 @@ const PageWrapperContent = styled.div`
     }
 `;
 
+type RenderBreacrumbItem = (item: { readonly title: React.ReactNode; readonly href?: string }) => React.ReactNode;
+
 interface PageWrapperProps extends PageWrapperContentProps {
     readonly className?: string;
     readonly headerProps?: IPageHeaderProps & {
-        readonly itemRender: (item: { readonly title: React.ReactNode; readonly href?: string }) => React.ReactNode;
+        readonly itemRender?: RenderBreacrumbItem;
     };
 }
 
-export class PageWrapper extends React.Component<PageWrapperProps> {
+export class PageWrapper extends React.PureComponent<PageWrapperProps> {
+    static readonly renderBreacrumbItem: RenderBreacrumbItem = (item) => {
+        if (!item.href) {
+            return <span>{item.title}</span>;
+        }
+
+        return <Link to={item.href}>{item.title}</Link>;
+    }
+
     componentDidMount() {
         if (document.documentElement) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
     }
 
+    readonly getHeaderProps = () => {
+        const { headerProps } = this.props;
+
+        if (!headerProps) {
+            return null;
+        }
+
+        if (headerProps.breadcrumbList) {
+            return {
+                itemRender: PageWrapper.renderBreacrumbItem,
+                ...headerProps
+            };
+        }
+
+        return headerProps;
+    }
+
     render() {
-        const { backgroundColor, className, headerProps } = this.props;
+        const { backgroundColor } = this.props;
+
+        const headerProps = this.getHeaderProps();
         return (
             <PageWrapperContent
-                className={className}
                 backgroundColor={backgroundColor}
             >
                 {headerProps && <PageHeader {...headerProps} />}

@@ -16,7 +16,7 @@ export interface FormFactoryProps {
 
 export interface FormCreateOptions<FormValues = {}, OwnProps = {}, RecordType = {}> {
     readonly resource: Resource<RecordType>;
-    readonly onSusscess: (responseData: {}, ownProps: OwnProps) => void;
+    readonly onSusscess: (responseData: RecordType, ownProps: OwnProps) => void;
     readonly onFailed?: (error: Response) => void;
     readonly initialValues?: FormValues;
     readonly component: React.ComponentType<FormikProps<FormValues>>;

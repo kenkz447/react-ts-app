@@ -14,6 +14,7 @@ import {
     Authentication,
     ContextFetcher,
     DecodedJWT,
+    GlobalModal,
     policies
 } from './domain';
 import { I18NLoader } from './i18n';
@@ -44,6 +45,7 @@ const AppContent = () => (
         <BreakpointDetector />
         <I18NLoader>
             <RouterRoot />
+            <GlobalModal />
         </I18NLoader>
     </Authentication>
 );

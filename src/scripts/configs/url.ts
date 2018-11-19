@@ -8,6 +8,12 @@ export const DASHBOARD_TITLE = 'Dashboard';
 export const TOPICS_URL = '/topics';
 export const TOPICS_TITLE = 'Topics';
 
+export const TOPICS_NEW_URL = TOPICS_URL + '/new';
+export const TOPICS_NEW_TITLE = 'New topics';
+
+export const TOPICS_DETAIL_PATH = TOPICS_URL + '/:id';
+export const TOPICS_DETAIL_TITLE = 'Topic';
+
 export const USER_URL_PREFIX = '/user';
 
 export const USER_PROFILE_URL = USER_URL_PREFIX + '/profile';

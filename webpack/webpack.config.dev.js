@@ -22,7 +22,8 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'API_ENTRY': JSON.stringify('https://gentle-brushlands-45403.herokuapp.com'),
+            'API_ENTRY': JSON.stringify('https://protected-dusk-97974.herokuapp.com'),
+            // 'API_ENTRY': JSON.stringify('http://localhost:1337'),
         }),
         new ErrorOverlayPlugin(),
         new webpack.HotModuleReplacementPlugin(),
