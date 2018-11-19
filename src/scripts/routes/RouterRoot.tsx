@@ -12,9 +12,11 @@ import { BlankLayout, DefaultLayout } from '@/layout';
 import authRoutes from './route-auth';
 import { RouteHome } from './route-home';
 import { RouteProfile } from './route-profile';
+import { RouteTopics } from './route-topics';
 
 const mainRoutes = routeFrom([
     RouteHome,
+    RouteTopics,
     RouteProfile
 ]);
 

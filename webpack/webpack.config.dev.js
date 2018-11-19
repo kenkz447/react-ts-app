@@ -60,7 +60,10 @@ module.exports = {
                 paths: [path.resolve(__dirname, "node_modules")],
                 javascriptEnabled: true,
                 modifyVars: {
-                    '@blue-6': '#9980FA'
+                    '@blue-6': '#9980FA',
+                    '@font-family': "'Roboto Mono', monospace",
+                    '@font-size-base': '13px',
+                    '@font-size-sm': '11px'
                 }
             }
         },

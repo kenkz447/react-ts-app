@@ -5,6 +5,8 @@ import {
     DASHBOARD_TITLE,
     DASHBOARD_URL,
     PROFILE_TITLE,
+    TOPICS_TITLE,
+    TOPICS_URL,
     USER_PROFILE_URL,
     USER_URL_PREFIX
 } from '@/configs';
@@ -88,6 +90,10 @@ export class DefaultLayoutSiderMenu extends React.Component<DefaultLayoutSiderMe
                 <Menu.Item key={DASHBOARD_URL}>
                     <Icon type="dashboard" />
                     <span>{text(DASHBOARD_TITLE)}</span>
+                </Menu.Item>
+                <Menu.Item key={TOPICS_URL}>
+                    <Icon type="folder" />
+                    <span>{text(TOPICS_TITLE)}</span>
                 </Menu.Item>
                 {this.renderSubmenu(userSubmenu)}
             </Menu>
