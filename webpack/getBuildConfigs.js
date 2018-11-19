@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require('compression-webpack-plugin')
 const OfflinePlugin = require('offline-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -29,9 +29,9 @@ module.exports = function getBuildConfig(options) {
 
     plugins.push(new webpack.NamedChunksPlugin());
 
-    plugins.push(new ExtractTextPlugin({
-        filename: '[name].[hash].css',
-        allChunks: true
+    plugins.push(new MiniCssExtractPlugin({
+        filename: "[name].[chunkhash].css",
+        chunkFilename: "[id].[chunkhash].css"
     }));
 
     if (options.sourceMap) {
@@ -101,9 +101,9 @@ module.exports = function getBuildConfig(options) {
             rules: [
                 {
                     test: /\.(css|sass|scss)$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [{
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        {
                             loader: 'css-loader'
                         }, {
                             loader: 'resolve-url-loader',
@@ -112,21 +112,21 @@ module.exports = function getBuildConfig(options) {
                             options: {
                                 includePaths: [path.resolve(__dirname, 'src')]
                             }
-                        }]
-                    })
+                        }
+                    ]
                 }, {
                     test: /\.(less)$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [{
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        {
                             loader: 'css-loader'
                         }, {
                             loader: 'resolve-url-loader',
                         }, {
                             loader: 'less-loader',
                             options: common.lessLoaderOptions
-                        }]
-                    })
+                        }
+                    ]
                 },
                 common.modules.rules.typescript,
                 common.modules.rules.fonts,
