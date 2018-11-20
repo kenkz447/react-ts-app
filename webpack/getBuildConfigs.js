@@ -8,6 +8,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const common = require('./common');
 
@@ -27,6 +28,8 @@ module.exports = function getBuildConfig(options) {
     if (options.analyzer) {
         plugins.push(new BundleAnalyzerPlugin());
     }
+    
+    plugins.push(new ForkTsCheckerWebpackPlugin());
     plugins.push(new webpack.NamedChunksPlugin());
 
     plugins.push(new MiniCssExtractPlugin({
@@ -72,11 +75,8 @@ module.exports = function getBuildConfig(options) {
             children: false,
             modules: false
         },
-        entry: {
-            app: './src/index'
-        },
+        entry: ['./src/index'],
         output: {
-            pathinfo: false,
             publicPath: '/static/',
             path: path.join(__dirname, '..', 'dist', 'static'),
             filename: '[name].[chunkhash].js',

@@ -18,18 +18,18 @@
             "esnext.asynciterable"
         ],
         "moduleResolution": "node",
-        "module": "esnext",
+        "module": "es2015",
         "noImplicitAny": false,
         "removeComments": true,
         "sourceMap": true,
         "strictNullChecks": true,
-        "target": "es5",
+        "target": "es2015",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
         "types": [
             "webpack-env"
-        ],
+        ]
     },
     "exclude": [
         "node_modules",
