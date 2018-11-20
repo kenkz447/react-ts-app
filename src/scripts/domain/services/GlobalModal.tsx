@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 
-import { DomainContext, WithGlobalModal } from './base';
+import { DomainContext, WithGlobalModal } from '../base';
 
 const GlobalModal = (props: WithContextProps<WithGlobalModal>) => {
     const { globalModal, setContext } = props;

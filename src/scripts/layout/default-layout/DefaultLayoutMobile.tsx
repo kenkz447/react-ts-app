@@ -8,7 +8,6 @@ import { WithHistory } from '@/domain';
 export interface DefaultLayoutMobileProps extends WithHistory {
     readonly header: JSX.Element;
     readonly children: JSX.Element;
-    readonly footer: JSX.Element;
     readonly siderProps: SiderProps;
 }
 
@@ -46,7 +45,7 @@ export class DefaultLayoutMobile extends React.Component<DefaultLayoutMobileProp
     }
 
     render() {
-        const { siderProps, children, footer, header } = this.props;
+        const { siderProps, children, header } = this.props;
         return (
             <React.Fragment>
                 <Layout style={{ minHeight: '100vh' }}>
@@ -63,9 +62,6 @@ export class DefaultLayoutMobile extends React.Component<DefaultLayoutMobileProp
                     <Layout.Content>
                         {children}
                     </Layout.Content>
-                    <Layout.Footer style={{ textAlign: 'center' }}>
-                        {footer}
-                    </Layout.Footer>
                 </Layout>
                 <Drawer
                     placement="left"

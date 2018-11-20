@@ -5,14 +5,13 @@ import * as React from 'react';
 export interface DefaultLayoutDesktopProps {
     readonly header: JSX.Element;
     readonly children: JSX.Element;
-    readonly footer: JSX.Element;
     readonly siderProps: SiderProps;
 }
 
 export const DefaultLayoutDesktop = React.memo((props: DefaultLayoutDesktopProps) => {
     const [siderCollapsed, setSiderCollapsed] = React.useState(false);
 
-    const { siderProps, children, footer, header } = props;
+    const { siderProps, children, header } = props;
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Layout.Sider
@@ -33,9 +32,6 @@ export const DefaultLayoutDesktop = React.memo((props: DefaultLayoutDesktopProps
                 <Layout.Content>
                     {children}
                 </Layout.Content>
-                <Layout.Footer style={{ textAlign: 'center' }}>
-                    {footer}
-                </Layout.Footer>
             </Layout>
         </Layout>
     );

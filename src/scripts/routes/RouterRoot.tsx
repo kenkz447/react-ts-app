@@ -12,12 +12,18 @@ import { BlankLayout, DefaultLayout } from '@/layout';
 import authRoutes from './route-auth';
 import { RouteHome } from './route-home';
 import { RouteProfile } from './route-profile';
-import { RouteTopicDetail, RouteTopicList, RouteTopicNew } from './route-topic';
+import {
+    RouteTopicDetail,
+    RouteTopicLean,
+    RouteTopicList,
+    RouteTopicNew
+} from './route-topic';
 
 const mainRoutes = routeFrom([
     RouteHome,
     RouteTopicList,
     RouteTopicNew,
+    RouteTopicLean,
     RouteTopicDetail,
     RouteProfile
 ]);

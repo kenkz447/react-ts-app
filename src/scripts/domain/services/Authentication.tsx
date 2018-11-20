@@ -3,8 +3,7 @@ import { withContext, WithContextProps } from 'react-context-service';
 
 import { User } from '@/restful';
 
-import { DomainContext } from '../Types';
-import { AuthClient } from './AuthClient';
+import { AuthClient, DomainContext } from '../base';
 
 type AuthenticationOwnProps = {
     readonly authClient: AuthClient<User>;

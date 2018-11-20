@@ -1,7 +1,8 @@
+import { Card, Col, Row } from 'antd';
 import * as React from 'react';
 
 import { RouteInfo } from '@/app';
-import { PageWrapper } from '@/components';
+import { PageContent, PageWrapper } from '@/components';
 import { DASHBOARD_URL } from '@/configs';
 import { AppPageProps, RoutePage } from '@/domain';
 import { isRoot } from '@/domain/policies';
@@ -19,7 +20,22 @@ export class RouteHome extends RoutePage<RouteHomeProps> {
     render() {
         return (
             <PageWrapper>
-                Welcome to Home page!
+                <PageContent>
+                    <Row gutter={15}>
+                        <Col span={24} md={6}>
+                            <Card style={{ height: 200 }} />
+                        </Col>
+                        <Col span={24} md={6}>
+                            <Card style={{ height: 200 }} />
+                        </Col>
+                        <Col span={24} md={6}>
+                            <Card style={{ height: 200 }} />
+                        </Col>
+                        <Col span={24} md={6}>
+                            <Card style={{ height: 200 }} />
+                        </Col>
+                    </Row>
+                </PageContent>
             </PageWrapper>
         );
     }

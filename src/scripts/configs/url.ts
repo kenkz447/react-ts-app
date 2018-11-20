@@ -14,6 +14,9 @@ export const TOPICS_NEW_TITLE = 'New topics';
 export const TOPICS_DETAIL_PATH = TOPICS_URL + '/:id';
 export const TOPICS_DETAIL_TITLE = 'Topic';
 
+export const TOPICS_LEARN_URL = TOPICS_DETAIL_PATH + '/learn';
+export const TOPICS_LEARN_TITLE = 'Learning';
+
 export const USER_URL_PREFIX = '/user';
 
 export const USER_PROFILE_URL = USER_URL_PREFIX + '/profile';

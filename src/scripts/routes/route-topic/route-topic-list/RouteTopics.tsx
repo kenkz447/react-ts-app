@@ -1,14 +1,9 @@
-import { Button, Card, Icon } from 'antd';
+import { Button, Card } from 'antd';
 import * as React from 'react';
 
 import { RouteInfo } from '@/app';
 import { PageContent, PageWrapper } from '@/components';
-import {
-    DASHBOARD_URL,
-    TOPICS_NEW_URL,
-    TOPICS_TITLE,
-    TOPICS_URL
-} from '@/configs';
+import { TOPICS_NEW_URL, TOPICS_TITLE, TOPICS_URL } from '@/configs';
 import { AppPageProps, DomainContext, RoutePage } from '@/domain';
 import { isRoot } from '@/domain/policies';
 import { text } from '@/i18n';
@@ -38,13 +33,7 @@ export class RouteTopicList extends RoutePage<RouteTopicsProps> {
                 >
                     {text('New topics')}
                 </Button>
-            ),
-            breadcrumbList: [{
-                href: DASHBOARD_URL,
-                title: <Icon type="home" />
-            }, {
-                title: text(TOPICS_TITLE)
-            }]
+            )
         };
     }
 

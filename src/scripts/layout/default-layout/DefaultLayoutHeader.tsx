@@ -24,6 +24,9 @@ const DefaultLayoutHeaderWrapper = styled.div`
         &:hover {
             background: rgba(0,0,0,.025);
         }
+        svg {
+            vertical-align: middle;
+        }
     }
 `;
 

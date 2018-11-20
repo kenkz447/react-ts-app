@@ -8,6 +8,11 @@ import { text } from '@/i18n';
 import { Topic } from '@/restful';
 import { replaceRoutePath } from '@/utilities';
 
+const flexCenterStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center'
+}
+
 type TopicListProps = RestfulRenderChildProps<Topic[]>;
 
 export class TopicList extends React.PureComponent<TopicListProps> {
@@ -42,21 +47,21 @@ export class TopicList extends React.PureComponent<TopicListProps> {
                         )}
                         description={topic.description}
                     />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={flexCenterStyle}>
                         <Row gutter={30} type="flex">
-                            <Col span={6} style={{ display: 'flex', alignItems: 'center' }}>
+                            <Col span={6} style={flexCenterStyle}>
                                 <div>
                                     <small>{text('Word count')}</small>
                                     <div>{0}</div>
                                 </div>
                             </Col>
-                            <Col span={10} style={{ display: 'flex', alignItems: 'center' }}>
+                            <Col span={10} style={flexCenterStyle}>
                                 <div style={{ minWidth: 150 }}>
                                     <small>{text('Created at ')}</small>
                                     <div>{topic.createdAt}</div>
                                 </div>
                             </Col>
-                            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+                            <Col span={8} style={flexCenterStyle}>
                                 <Progress percent={topic.memorize || 0} size="small" />
                             </Col>
                         </Row>

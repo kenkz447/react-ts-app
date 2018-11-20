@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { RouteInfo } from '@/app';
 
-import { AppPageProps } from './base';
+import { AppPageProps } from './';
 
 export class RoutePage<P extends AppPageProps = AppPageProps, S= {}>
     extends React.PureComponent<P, S> {

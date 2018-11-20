@@ -8,6 +8,7 @@ import {
     DASHBOARD_URL,
     TOPICS_DETAIL_PATH,
     TOPICS_DETAIL_TITLE,
+    TOPICS_LEARN_URL,
     TOPICS_TITLE,
     TOPICS_URL
 } from '@/configs';
@@ -16,6 +17,7 @@ import { isRoot } from '@/domain/policies';
 import { NewWordFormControl } from '@/forms/word';
 import { text } from '@/i18n';
 import { request, Topic, topicResources } from '@/restful';
+import { replaceRoutePath } from '@/utilities';
 
 import { TopicWordsContainer } from './containers';
 
@@ -33,15 +35,32 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
         policies: [isRoot]
     };
 
-    readonly state: RouteTopicDetailState = {
-        topic: this.props.location.state
-    };
+    constructor(props: RouteTopicDetailProps) {
+        super(props);
+        const { location, match } = props;
+
+        let defaultTopic = location.state;
+
+        if (!defaultTopic) {
+            defaultTopic = {
+                id: match.params.id,
+                name: 'topic'
+            };
+
+            this.fetchTopic(defaultTopic.id);
+        }
+
+        this.state = {
+            topic: defaultTopic
+        };
+    }
 
     readonly getHeaderProps = (): IPageHeaderProps => {
         const { history } = this.props;
         const { topic } = this.state;
 
         const topicName = topic ? topic.name : text(TOPICS_DETAIL_TITLE);
+        const learnPageUrl = replaceRoutePath(TOPICS_LEARN_URL, topic);
 
         return {
             title: topicName,
@@ -49,7 +68,10 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
             action: (
                 <Button
                     type="primary"
-                    onClick={() => history.push('/topics/learn')}
+                    onClick={() => history.push({
+                        pathname: learnPageUrl,
+                        state: topic
+                    })}
                 >
                     {text('Start learning')}
                 </Button>
@@ -61,24 +83,15 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
             }, {
                 href: TOPICS_URL,
                 title: text(TOPICS_TITLE)
-            }, {
-                title: topicName
             }]
         };
     }
 
-    readonly fetchTopic = async () => {
-        const { topic } = this.state;
-        if (topic) {
-            return;
-        }
-        const { match } = this.props;
-        const { id } = match.params;
-
+    readonly fetchTopic = async (topicId: string) => {
         const currentTopic = await request(topicResources.findOne, {
             type: 'path',
             parameter: 'id',
-            value: id
+            value: topicId
         });
 
         this.setState({
@@ -89,6 +102,7 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
     render() {
         const { topic } = this.state;
         const { match } = this.props;
+
         return (
             <PageWrapper headerProps={this.getHeaderProps()}>
                 <PageContent>

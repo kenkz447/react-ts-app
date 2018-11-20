@@ -5,11 +5,12 @@ import * as React from 'react';
 
 import { text } from '@/i18n';
 
-export interface EditableInputProps<T = {}> {
+export interface EditableInputProps{
     readonly property: string;
     readonly defaultValue: string;
     // tslint:disable-next-line:no-any
     readonly onChange?: (value: string) => Promise<any>;
+    readonly onEditDone?: (data: {}) => void; 
     readonly placeholder?: string;
     readonly allowEmpty?: boolean;
 }
@@ -36,7 +37,7 @@ export class EditableInput extends React.PureComponent<EditableInputProps, Edita
     }
 
     public render() {
-        const { onChange, defaultValue, placeholder, allowEmpty } = this.props;
+        const { onChange, defaultValue, placeholder, allowEmpty, onEditDone } = this.props;
         const { currentInputValue, loading } = this.state;
 
         return (
@@ -54,13 +55,13 @@ export class EditableInput extends React.PureComponent<EditableInputProps, Edita
                 }}
                 onChange={this.onInputValueChanged}
                 onBlur={async (e) => {
-                    if (allowEmpty === false) {
+                    if (allowEmpty === false && !currentInputValue) {
                         const warnText = text('Empty value not allowed!');
                         void message.warning(warnText);
                         this.setState({
                             currentInputValue: defaultValue
                         });
-                        
+
                         return;
                     }
 
@@ -72,7 +73,7 @@ export class EditableInput extends React.PureComponent<EditableInputProps, Edita
                         loading: true
                     });
 
-                    await onChange(currentInputValue);
+                    const onChangeResult = await onChange(currentInputValue);
 
                     const successText = text('Success');
                     message.success(successText);
@@ -80,6 +81,10 @@ export class EditableInput extends React.PureComponent<EditableInputProps, Edita
                     this.setState({
                         loading: false
                     });
+
+                    if (onEditDone) {
+                        onEditDone(onChangeResult);
+                    }
                 }}
             />
         );
