@@ -8,7 +8,8 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
 const common = require('./common');
 
@@ -28,7 +29,7 @@ module.exports = function getBuildConfig(options) {
     if (options.analyzer) {
         plugins.push(new BundleAnalyzerPlugin());
     }
-    
+
     plugins.push(new ForkTsCheckerWebpackPlugin());
     plugins.push(new webpack.NamedChunksPlugin());
 
@@ -44,6 +45,18 @@ module.exports = function getBuildConfig(options) {
         }));
     }
 
+
+
+    plugins.push(new HtmlWebpackPlugin({
+        template: 'src/index.html',
+        inject: 'body'
+    }));
+    plugins.push(new InlineManifestWebpackPlugin())
+
+    plugins.push(new CopyWebpackPlugin([
+        { from: './static' },
+    ]));
+
     if (options.compression) {
         plugins.push(new CompressionPlugin({
             test: /\.(js|css)/,
@@ -52,15 +65,6 @@ module.exports = function getBuildConfig(options) {
             cache: true
         }));
     }
-
-    plugins.push(new HtmlWebpackPlugin({
-        template: 'src/index.html',
-        inject: 'body'
-    }));
-
-    plugins.push(new CopyWebpackPlugin([
-        { from: './static' },
-    ]));
 
     plugins.push(new WorkboxPlugin.GenerateSW({
         clientsClaim: true,
