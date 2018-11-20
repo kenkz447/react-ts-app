@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 import styled from 'styled-components';
 
-import { loginPath, USER_PROFILE_URL } from '@/configs';
+import { USER_PROFILE_URL } from '@/configs';
 import { WithAuthClient, WithCurrentUser, WithHistory } from '@/domain';
 import { text } from '@/i18n';
 
@@ -19,7 +19,6 @@ const AccountName = styled.span`
     vertical-align: middle;
 `;
 
-// tslint:disable-next-line:max-line-length
 const defaultAvatar = 'http://tinygraphs.com/labs/squares/random?theme=frogideas';
 
 export interface HeaderUserActionsProps {

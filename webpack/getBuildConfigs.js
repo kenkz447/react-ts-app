@@ -27,7 +27,6 @@ module.exports = function getBuildConfig(options) {
     if (options.analyzer) {
         plugins.push(new BundleAnalyzerPlugin());
     }
-
     plugins.push(new webpack.NamedChunksPlugin());
 
     plugins.push(new MiniCssExtractPlugin({
@@ -77,6 +76,7 @@ module.exports = function getBuildConfig(options) {
             app: './src/index'
         },
         output: {
+            pathinfo: false,
             publicPath: '/static/',
             path: path.join(__dirname, '..', 'dist', 'static'),
             filename: '[name].[chunkhash].js',

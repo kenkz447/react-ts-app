@@ -29,7 +29,7 @@ function HeaderSelectLanguage(props: WithContextProps<HeaderSelectLanguageContex
                         avaliableLanguages.map(lang => {
                             return (
                                 <Menu.Item key={lang.name}>
-                                    <SymbolLang role="img">{lang.symbol}</SymbolLang> {lang.label}
+                                    <SymbolLang>{lang.symbol}</SymbolLang> {lang.label}
                                 </Menu.Item>
                             );
                         })

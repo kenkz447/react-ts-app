@@ -2,7 +2,6 @@ import * as React from 'react';
 import { withContext } from 'react-context-service';
 
 import { DomainContext, WithDomainContext } from '@/domain';
-import { request, salonResources } from '@/restful';
 
 type ContextFetcherProps = WithDomainContext & Pick<DomainContext, 'currentUser'>;
 

@@ -5,7 +5,7 @@ import { Topic } from './topic';
 export interface Word {
     readonly id: string;
     readonly source: string;
-    readonly target: string;
+    readonly translation: string;
     readonly examples: string;
     readonly memorize: number;
     readonly topic: Topic;

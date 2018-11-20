@@ -13,8 +13,11 @@ import {
 } from '@/configs';
 import { AppPageProps, RoutePage } from '@/domain';
 import { isRoot } from '@/domain/policies';
+import { NewWordFormControl } from '@/forms/word';
 import { text } from '@/i18n';
 import { request, Topic, topicResources } from '@/restful';
+
+import { TopicWordsContainer } from './containers';
 
 type RouteTopicDetailProps = AppPageProps<{ readonly id: string }>;
 
@@ -84,11 +87,19 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
     }
 
     render() {
+        const { topic } = this.state;
         return (
             <PageWrapper headerProps={this.getHeaderProps()}>
                 <PageContent>
+                    <Card
+                        style={{ marginBottom: 24 }}
+                        bordered={false}
+                        title="Add new word"
+                    >
+                        <NewWordFormControl initialValues={{ topic: topic }} />
+                    </Card>
                     <Card bordered={false}>
-                        {null}
+                        {topic && <TopicWordsContainer topic={topic} />}
                     </Card>
                 </PageContent>
             </PageWrapper>
