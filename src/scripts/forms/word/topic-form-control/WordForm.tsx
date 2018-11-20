@@ -2,15 +2,9 @@ import { Col, Row } from 'antd';
 import { FormikProps } from 'formik';
 import * as React from 'react';
 
-import {
-    FormInput,
-    FormSubmit,
-    FromBody,
-    verticalLayout,
-    verticalLayoutNoLabel
-} from '@/components';
+import { FormInput, FormSubmit, FromBody } from '@/components';
 import { text } from '@/i18n';
-import { Topic, Word } from '@/restful';
+import { Word } from '@/restful';
 
 export type WordFormOwnProps = FormikProps<Word>;
 

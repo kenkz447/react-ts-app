@@ -1,1 +1,1 @@
-export * from './TopicForm';
+export * from './WordForm';

@@ -13,14 +13,14 @@ type TopicListProps = RestfulRenderChildProps<Topic[]>;
 export class TopicList extends React.PureComponent<TopicListProps> {
     readonly skeletonData = [1, 2, 3, 4];
     readonly renderListItem = (topic: Topic & { readonly loading: boolean }) => {
-        const { fetching } = this.props;
+        const { data, fetching } = this.props;
         return (
             <List.Item
                 actions={topic.id ? [<a key="delete" href="x">{text('Delete')}</a>] : []}
             >
                 <Skeleton
                     title={false}
-                    loading={fetching}
+                    loading={data!.length === 0 && fetching}
                     active={true}
                     avatar={true}
                 >
@@ -71,7 +71,7 @@ export class TopicList extends React.PureComponent<TopicListProps> {
         return (
             <List
                 itemLayout="horizontal"
-                dataSource={data || this.skeletonData}
+                dataSource={data!.length ? data : this.skeletonData}
                 renderItem={this.renderListItem}
             />
         );

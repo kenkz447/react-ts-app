@@ -45,12 +45,11 @@ module.exports = function getBuildConfig(options) {
         }));
     }
 
-
-
     plugins.push(new HtmlWebpackPlugin({
         template: 'src/index.html',
         inject: 'body'
     }));
+    
     plugins.push(new InlineManifestWebpackPlugin())
 
     plugins.push(new CopyWebpackPlugin([
@@ -79,7 +78,9 @@ module.exports = function getBuildConfig(options) {
             children: false,
             modules: false
         },
-        entry: ['./src/index'],
+        entry: {
+            app: './src/index'
+        },
         output: {
             publicPath: '/static/',
             path: path.join(__dirname, '..', 'dist', 'static'),

@@ -88,6 +88,7 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
 
     render() {
         const { topic } = this.state;
+        const { match } = this.props;
         return (
             <PageWrapper headerProps={this.getHeaderProps()}>
                 <PageContent>
@@ -99,7 +100,10 @@ export class RouteTopicDetail extends RoutePage<RouteTopicDetailProps, RouteTopi
                         <NewWordFormControl initialValues={{ topic: topic }} />
                     </Card>
                     <Card bordered={false}>
-                        {topic && <TopicWordsContainer topic={topic} />}
+                        <TopicWordsContainer
+                            topicId={match.params.id}
+                            defaultWords={topic && topic.words}
+                        />
                     </Card>
                 </PageContent>
             </PageWrapper>

@@ -30,7 +30,19 @@ export const wordResources = {
     update: new Resource<Word>({
         resourceType: wordResourceType,
         url: '/words/:id',
-        method: 'PUT'
+        method: 'PUT',
+        getDefaultParams: (params) => {
+            const bodyParams = params.find(o => o.type === 'body');
+            if (!bodyParams) {
+                throw new Error('PUT request need a body!');
+            }
+            const bodyValue = bodyParams.value as Word;
+            return {
+                type: 'path',
+                parameter: 'id',
+                value: bodyValue.id,
+            };
+        }
     }),
     delete: new Resource<Word>({
         resourceType: wordResourceType,

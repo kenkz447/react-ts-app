@@ -42,6 +42,7 @@ export class NewWordFormControl extends React.PureComponent<NewWordFormControlPr
             });
         } finally {
             formiKBag.setSubmitting(false);
+            formiKBag.resetForm();
         }
     }
 }

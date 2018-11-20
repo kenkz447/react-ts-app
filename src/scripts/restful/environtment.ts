@@ -56,6 +56,7 @@ const environment = setupEnvironment({
 });
 
 export const request = environment.request;
+export const restfulStore = environment.store;
 
 export const formFactory = new FormikFactory({
     request: request
