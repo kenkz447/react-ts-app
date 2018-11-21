@@ -9,6 +9,13 @@ export interface RootProps<Context extends AppCoreContext = AppCoreContext> {
 }
 
 export class Root extends React.Component<RootProps> {
+    // tslint:disable-next-line:readonly-keyword
+    static ContextConsumer: React.Consumer<AppCoreContext>;
+
+    componentDidMount() { 
+        Root.ContextConsumer = ContextCreator.instance.Context.Consumer;
+    }
+
     render() {
         const { AppContent, initialContext } = this.props;
 

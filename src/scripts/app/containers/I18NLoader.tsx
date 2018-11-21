@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withContext, WithContextProps } from 'react-context-service';
 
-import { AppCoreContext } from '@/app';
+import { AppCoreContext } from '../core';
 
 // tslint:disable-next-line:interface-name
 interface I18NState {

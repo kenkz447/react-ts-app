@@ -18,6 +18,8 @@ import { text } from '@/i18n';
 import { request, Topic, topicResources } from '@/restful';
 import { replaceRoutePath } from '@/utilities';
 
+import { TopicLearnContainer } from './containers';
+
 type RouteTopicsNewProps = AppPageProps<Topic>;
 
 interface RouteTopicDetailState {
@@ -83,21 +85,11 @@ export class RouteTopicLean extends RoutePage<RouteTopicsNewProps, RouteTopicDet
     }
 
     render() {
+        const { topic } = this.state;
         return (
             <PageWrapper headerProps={this.getHeaderProps()}>
                 <PageContent>
-                    <Row gutter={24}>
-                        <Col span={16}>
-                            <Card>
-                                {null}
-                            </Card>
-                        </Col>
-                        <Col span={8}>
-                            <Card>
-                                {null}
-                            </Card>
-                        </Col>
-                    </Row>
+                    <TopicLearnContainer topic={topic} />
                 </PageContent>
             </PageWrapper>
         );

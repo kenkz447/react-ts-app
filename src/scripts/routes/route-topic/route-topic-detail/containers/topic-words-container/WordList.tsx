@@ -36,9 +36,9 @@ export class WordList extends React.PureComponent<WordListProps> {
                                     return (
                                         <EditableInput
                                             defaultValue={translation}
-                                            property={nameof<Word>(o => o.translation)}
                                             allowEmpty={false}
-                                            onChange={(newInputValue) =>
+                                            doneMessage="Success"
+                                            onResult={(newInputValue) =>
                                                 request(
                                                     wordResources.update,
                                                     [{
@@ -61,9 +61,9 @@ export class WordList extends React.PureComponent<WordListProps> {
                                     return (
                                         <EditableInput
                                             defaultValue={examples}
-                                            property={nameof<Word>(o => o.examples)}
                                             placeholder="missing example..."
-                                            onChange={(newInputValue) =>
+                                            doneMessage="Success"
+                                            onResult={(newInputValue) =>
                                                 request(
                                                     wordResources.update,
                                                     [{

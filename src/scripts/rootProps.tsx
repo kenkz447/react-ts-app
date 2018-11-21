@@ -5,6 +5,7 @@ import * as React from 'react';
 import {
     AppCoreContext,
     BreakpointDetector,
+    I18NLoader,
     LoadingBar,
     RootProps
 } from './app';
@@ -17,7 +18,6 @@ import {
     GlobalModal,
     policies
 } from './domain';
-import { I18NLoader } from './i18n';
 import { LocalLoginResponseBody, User, userResources } from './restful';
 import { RouterRoot } from './routes';
 
