@@ -11,6 +11,7 @@ export interface Topic {
     readonly memorize: number;
     readonly createdAt: string;
     readonly words: Word[];
+    readonly totalWords: number;
 }
 
 export const topicResourceType = new ResourceType<Topic>('Topic');

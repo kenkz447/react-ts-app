@@ -65,10 +65,6 @@ const SiderLogo = styled.div`
     }
 `;
 
-const DefaultLayoutContent = styled.div`
-    position: relative;
-`;
-
 type DefaultLayoutProps =
     Pick<DomainContext, 'currentBreakpoint'> &
     Pick<DomainContext, 'history'>;
@@ -109,12 +105,6 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
         const { children, history } = this.props;
         const siderContent = this.getSiderContent();
         const header = <DefaultLayoutHeader />;
-        const footer = null;
-        const childrenContent = (
-            <DefaultLayoutContent>
-                {children}
-            </DefaultLayoutContent>
-        );
         const isMobile = this.isMobileViewport();
 
         return (
@@ -131,7 +121,7 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
                                 header={header}
                                 history={history}
                             >
-                                {childrenContent}
+                                {children}
                             </DefaultLayoutMobile>
                         ) :
                         (
@@ -144,7 +134,7 @@ export class DefaultLayout extends React.PureComponent<DefaultLayoutProps> {
                                 }}
                                 header={header}
                             >
-                                {childrenContent}
+                                {children}
                             </DefaultLayoutDesktop>
                         )
                 }

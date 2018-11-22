@@ -7,7 +7,7 @@ import { WithHistory } from '@/domain';
 
 export interface DefaultLayoutMobileProps extends WithHistory {
     readonly header: JSX.Element;
-    readonly children: JSX.Element;
+    readonly children: React.ReactNode;
     readonly siderProps: SiderProps;
 }
 

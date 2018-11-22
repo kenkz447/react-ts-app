@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { RestfulRender } from 'react-restful';
 
-import { Word, wordResources } from '@/restful';
+import { Word } from '@/restful';
 
 import { WordList } from './topic-words-container';
 
@@ -11,17 +10,6 @@ interface TopicWordsContainerProps {
 }
 
 export const TopicWordsContainer = React.memo((props: TopicWordsContainerProps) => {
-    const { topicId, defaultWords } = props;
-    return (
-        <RestfulRender
-            resource={wordResources.find}
-            parameters={{
-                type: 'query',
-                parameter: nameof<Word>(o => o.topic),
-                value: topicId
-            }}
-            render={WordList}
-            defaultData={defaultWords}
-        />
-    );
+    const { defaultWords } = props;
+    return <WordList data={defaultWords} error={null} />;
 });

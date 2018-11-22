@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "warning",
+    "defaultSeverity": "warn",
     "extends": [
         "tslint-react",
         "tslint-immutable"

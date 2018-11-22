@@ -17,7 +17,6 @@ const PageWrapperContent = styled.div`
     top:0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: ${(props: PageWrapperContentProps) => props.backgroundColor};
     .antd-pro-page-header-pageHeader {
         padding: 16px 24px 0 24px;
@@ -41,6 +40,10 @@ export class PageWrapper extends React.PureComponent<PageWrapperProps> {
 
         return <Link to={item.href}>{item.title}</Link>;
     }
+
+    static readonly defaultProps = {
+        backgroundColor: '#f0f2f5'
+    };
 
     componentDidMount() {
         if (document.documentElement) {

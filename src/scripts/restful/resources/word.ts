@@ -48,5 +48,15 @@ export const wordResources = {
         resourceType: wordResourceType,
         url: '/words/:id',
         method: 'DELETE'
-    })
+    }),
+    learningCorrect: new Resource<Word>({
+        resourceType: wordResourceType,
+        url: '/words/:id/learning/correct',
+        method: 'PUT'
+    }),
+    learningIncorrect: new Resource<Word>({
+        resourceType: wordResourceType,
+        url: '/words/:id/learning/incorrect',
+        method: 'PUT'
+    }),
 };

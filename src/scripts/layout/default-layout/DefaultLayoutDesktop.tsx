@@ -1,10 +1,11 @@
 import { Icon, Layout } from 'antd';
 import { SiderProps } from 'antd/lib/layout';
+import { relative } from 'path';
 import * as React from 'react';
 
 export interface DefaultLayoutDesktopProps {
     readonly header: JSX.Element;
-    readonly children: JSX.Element;
+    readonly children: React.ReactNode;
     readonly siderProps: SiderProps;
 }
 
@@ -29,7 +30,7 @@ export const DefaultLayoutDesktop = React.memo((props: DefaultLayoutDesktopProps
                         {header}
                     </div>
                 </Layout.Header>
-                <Layout.Content>
+                <Layout.Content style={{ position: 'relative' }}>
                     {children}
                 </Layout.Content>
             </Layout>

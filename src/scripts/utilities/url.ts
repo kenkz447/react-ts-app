@@ -41,10 +41,12 @@ export const redirect = (uri) => {
 };
 
 export const replaceRoutePath = (path: string, obj: {}) => {
-    return Object.keys(obj).reduce(
+    const replacedPath = Object.keys(obj).reduce(
         (url, key) => {
-            return path.replace(`:${key}`, obj[key]);
+            return url.replace(`:${key}`, obj[key]);
         },
         path
     );
+
+    return replacedPath;
 };

@@ -35,7 +35,7 @@ export function WordForm(props: WordFormOwnProps) {
                             value={values.translation}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            label={text('Translation')}
+                            label={text('Meaning')}
                             placeholder={text('Input translation')}
                         />
                     </Col>

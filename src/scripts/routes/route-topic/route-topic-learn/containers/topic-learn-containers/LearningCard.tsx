@@ -1,10 +1,11 @@
 import { Card, Progress, Tag } from 'antd';
 import * as React from 'react';
+import { RequestParameter } from 'react-restful';
 import styled from 'styled-components';
 
 import { EditableInput } from '@/components';
 import { text } from '@/i18n';
-import { Word } from '@/restful';
+import { request, Word, wordResources } from '@/restful';
 
 const LearningCardWrapper = styled.div`
     .translation {
@@ -19,7 +20,7 @@ const LearningCardWrapper = styled.div`
         }
     }
     .progress-wrapper {
-        width: 200px;
+        width: 100%;
         margin-bottom: 15px;
     }
     .ant-progress-inner {
@@ -107,7 +108,6 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
 
     readonly onAnswer = async (value: string) => {
         const {
-            currentWord,
             lastInputIncorrect
         } = this.state;
 
@@ -115,7 +115,10 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
             return;
         }
 
-        if (value === currentWord.source) {
+        const isCorrectAnswer = this.isCorrectAnswer(value);
+
+        if (isCorrectAnswer) {
+            this.submitWordResult(true);
             return void this.toNextWord(value);
         }
 
@@ -128,7 +131,6 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
 
     readonly reAnswerOnEnter = (e: React.KeyboardEvent<HTMLInputElement>, value) => {
         const {
-            currentWord,
             lastInputIncorrect
         } = this.state;
 
@@ -143,11 +145,24 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
             return;
         }
 
-        if (value !== currentWord.source) {
-            return;
+        const isCorrectAnswer = this.isCorrectAnswer(value);
+
+        if (!isCorrectAnswer) {
+            return void this.submitWordResult(false);
         }
 
         this.toNextWord();
+    }
+
+    readonly isCorrectAnswer = (answer: string) => {
+        if (!answer) {
+            return false;
+        }
+        const {
+            currentWord,
+        } = this.state;
+
+        return answer.toLowerCase() === currentWord.source.toLowerCase();
     }
 
     readonly getCurrentProgress = () => {
@@ -155,6 +170,22 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
         const { currentWordIndex } = this.state;
 
         return 100 * currentWordIndex / words.length;
+    }
+
+    readonly submitWordResult = (isCorrect: boolean) => {
+        const { currentWord } = this.state;
+        const requestParams: RequestParameter = {
+            type: 'path',
+            parameter: 'id',
+            value: currentWord.id
+        };
+
+        return void request(
+            isCorrect ?
+                wordResources.learningCorrect :
+                wordResources.learningIncorrect,
+            requestParams
+        );
     }
 
     public render() {
@@ -170,8 +201,6 @@ export class LearningCard extends React.PureComponent<LearningCardProps, Learnin
                     <Progress
                         strokeColor="#52c41a"
                         percent={this.getCurrentProgress()}
-                        width={200}
-                        trailColor="#fff"
                     />
                 </div>
                 <Card>

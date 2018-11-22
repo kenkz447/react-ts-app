@@ -35,10 +35,11 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
 
             activeRequests++;
 
-            this.setState(
-                { mode: 'init' },
-                this.tick
-            );
+            if (this.state.mode !== 'hibernate') {
+                return;
+            }
+
+            this.setState({ mode: 'init' }, this.tick);
         });
 
         window.addEventListener(fetchSuccess, (e: FetchSuccessEvent) => {
@@ -49,7 +50,6 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
             }
 
             activeRequests--;
-            this.tick();
         });
 
         window.addEventListener(fetchFail, (e: FetchFailEvent) => {
@@ -60,7 +60,6 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
             }
 
             activeRequests--;
-            this.tick();
         });
     }
 
@@ -76,7 +75,7 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
                 () => {
                     this.setState({ mode: 'hibernate' });
                 },
-                1000
+                500
             );
         } else if (mode === 'active') {
             if (activeRequests === 0) {
@@ -135,30 +134,29 @@ export class LoadingBar extends React.PureComponent<LoadingBarProps, LoadingBarS
     readonly getBarStyle = (): React.CSSProperties => {
         const mode = this.state.mode;
 
-        const width = mode === 'complete' ? 100 : mode === 'init' ? 0 : 80;
-        const animationSpeed = mode === 'complete' ? 0.4 : 15;
-        const transition =
-            mode === 'init' ? '' : `width ${animationSpeed}s ease-in`;
+        const width = (mode === 'complete') ? 100 : ((mode === 'init') ? 0 : 80);
+        const animationSpeed = (mode === 'complete') ? 0.4 : 15;
+        const transition = (mode === 'init') ?
+            '' :
+            (mode === 'hibernate') ?
+                `opacity .2s ease-in` : `width ${animationSpeed}s ease-in`;
+
+        const opacity = (mode === 'hibernate') ? 0 : 1;
 
         return {
-            position: 'absolute',
+            position: 'fixed',
             top: '0',
             zIndex: 9000,
             backgroundColor: '#f0ad4e',
-            height: '3px',
+            height: '2px',
             transition,
             width: `${width}%`,
+            opacity: opacity,
             ...this.props.style
         };
     }
 
     render() {
-        const mode = this.state.mode;
-
-        if (mode === 'hibernate') {
-            return null;
-        }
-
         return (
             <div style={this.getBarStyle()} />
         );

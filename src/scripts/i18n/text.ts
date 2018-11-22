@@ -13,7 +13,7 @@ export const avaliableLanguages: {
     readonly symbol: string
 }[] = [
     { name: 'en', label: 'English', symbol: '🇬🇧' },
-    { name: 'vi', label: 'Vietnamese', symbol: '🇻🇮' }
+    { name: 'vi', label: 'Vietnamese', symbol: '🇻🇳' }
 ];
 
 export const text = (source) => {
