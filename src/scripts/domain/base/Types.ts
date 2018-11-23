@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppCoreContext, PageProps } from '@/app';
 import { User } from '@/restful';
 
-import { AuthClient } from './authentication';
+import { AuthClient } from './AuthClient';
 
 export interface DomainContext extends AppCoreContext<User> {
     readonly authClient: AuthClient<User>;

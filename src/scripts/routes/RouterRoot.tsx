@@ -72,4 +72,4 @@ class RouterRoot extends React.PureComponent<RouterRootProps> {
     }
 }
 
-export default withContext<DomainContext>('history', 'appState', 'currentBreakpoint')(RouterRoot); 
+export default withContext<RouterRootContextProps>('history', 'appState', 'currentBreakpoint')(RouterRoot); 

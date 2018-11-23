@@ -51,4 +51,4 @@ class I18NLoader extends React.PureComponent<WithContextProps<I18NLoaderContext>
     }
 }
 
-export default withContext<AppCoreContext>('currentLanguage')(I18NLoader);
+export default withContext<I18NLoaderContext>('currentLanguage')(I18NLoader);

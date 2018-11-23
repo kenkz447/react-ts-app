@@ -44,6 +44,7 @@ export class WordList extends React.PureComponent<WordListProps> {
             </div>
         );
     }
+    
     readonly doSpeech = (sourceText: string) => {
         const msg = new SpeechSynthesisUtterance();
         const voices = window.speechSynthesis.getVoices();
